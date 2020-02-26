@@ -6,8 +6,8 @@
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 
-title: fastpages
-description: An easy to use blogging platform with support for Jupyter Notebooks.
+title: Sharan's Blog
+description: Sharan's programming and self documentaion page
 github_username: sharan19
 # you can comment the below line out if your repo name is not different than your baseurl
 github_repo: "Sharan-s-Blog"
@@ -18,7 +18,7 @@ baseurl: "/Sharan-s-Blog" # the subpath of your site, e.g. "/blog".  WARNING: if
 
 # Email and twitter are optional:
 email: 
-twitter_username: "fastdotai"
+twitter_username: "amsharan"
 
 # Set this to true to get LaTeX math equation support
 use_math: 
