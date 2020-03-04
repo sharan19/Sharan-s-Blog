@@ -12,4 +12,4 @@ https://sharan19.github.io/Sharan-s-Blog/
 
 ## Main blog
 
-Will add more jupiter notebooks and word files contianing my work
+Will add more jupiter notebooks and word files containing my work
