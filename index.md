@@ -7,6 +7,4 @@ search: exclude
 ---
 # Posts
 
----
-hi
----
+
