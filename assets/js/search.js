@@ -8,7 +8,7 @@ var documents = [{
     "id": 1,
     "url": "https://sharan19.github.io/about/",
     "title": "About Me",
-    "body": "This is where you put the contents of your About page. Like all your pages, it’s in Markdown format. This website is powered by fastpages 1.       a blogging platform that natively supports Jupyter notebooks in addition to other formats.  &#8617;    "
+    "body": "Mechanical engineer who loves working in machine learning. I share things which i learn here.  Completed under graduate mechanical engineering 2013.  Working in my current organisation from 2018 as sales engineer.  Introducing sales forecasting to my organisation. Looking to work full time in machine learning in Vision and tabular problems. "
     }, {
     "id": 2,
     "url": "https://sharan19.github.io/categories/",
