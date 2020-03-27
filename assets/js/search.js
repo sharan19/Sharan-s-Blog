@@ -8,7 +8,7 @@ var documents = [{
     "id": 1,
     "url": "https://sharan19.github.io/about/",
     "title": "About Me",
-    "body": "Mechanical engineer who loves working in machine learning. I share things which i learn here.  Completed under graduate mechanical engineering 2013.  Working in my current organisation from 2018 as sales engineer.  Introducing sales forecasting to my organisation. Looking to work full time in machine learning in Vision and tabular problems. "
+    "body": "I am machine learning engineer  Completed under graduate mechanical engineering 2013.  Working in my current organisation from 2018 as sales engineer.  Introducing sales forecasting to my organisation.  Majorly worked in client facing roles. If you want to reach out message through twitter or linkedin "
     }, {
     "id": 2,
     "url": "https://sharan19.github.io/categories/",
