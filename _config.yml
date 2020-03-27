@@ -19,6 +19,7 @@ baseurl: "/Sharan-s-Blog" # the subpath of your site, e.g. "/blog".  WARNING: if
 # Email and twitter are optional:
 email: 
 twitter_username: "amsharan"
+linkedin_username: "amsharan"
 
 # Set this to true to get LaTeX math equation support
 use_math: 
