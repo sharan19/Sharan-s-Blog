@@ -4,10 +4,10 @@ title: About Me
 permalink: /about/
 ---
 
-This is where you put the contents of your *About* page. Like all your pages, it's in [Markdown](https://guides.github.com/features/mastering-markdown/) format.
+Mechanical engineer who loves working in machine learning. I share things which i learn here.
 
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
+1. Completed under graduate mechanical engineering 2013.
+2. Working in my current organisation from 2018 as sales engineer.
+3. Introducing sales forecasting to my organisation.
 
-
-
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
+Looking to work full time in machine learning in Vision and tabular problems.
