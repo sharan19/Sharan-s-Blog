@@ -6,5 +6,5 @@ layout: home
 search: exclude
 ---
 
-Hi This is Sharan. 
+Hi This is Sharan. Checkout my projects below and about me page.
 
