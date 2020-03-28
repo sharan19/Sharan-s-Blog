@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="shortcut icon" type="image/x-icon" href="/Sharan-s-Blog/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>My Sales Performance | Sharan’s Blog</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="My Sales Performance" />
+<meta name="author" content="Sharan Kumar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This notebook is to analyse my sales perfomance from 2018 september, the date i joined my organisation." />
+<meta property="og:description" content="This notebook is to analyse my sales perfomance from 2018 september, the date i joined my organisation." />
+<link rel="canonical" href="https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/sales/haas/forecasting/vmc/colab/2020/03/27/_03_26_Sharan_Sales_Performance.html" />
+<meta property="og:url" content="https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/sales/haas/forecasting/vmc/colab/2020/03/27/_03_26_Sharan_Sales_Performance.html" />
+<meta property="og:site_name" content="Sharan’s Blog" />
+<meta property="og:image" content="https://sharan19.github.io/Sharan-s-Blog/images/some_folder/your_image.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-27T00:00:00-05:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Sharan Kumar"},"description":"This notebook is to analyse my sales perfomance from 2018 september, the date i joined my organisation.","@type":"BlogPosting","headline":"My Sales Performance","dateModified":"2020-03-27T00:00:00-05:00","datePublished":"2020-03-27T00:00:00-05:00","url":"https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/sales/haas/forecasting/vmc/colab/2020/03/27/_03_26_Sharan_Sales_Performance.html","image":"https://sharan19.github.io/Sharan-s-Blog/images/some_folder/your_image.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/sales/haas/forecasting/vmc/colab/2020/03/27/_03_26_Sharan_Sales_Performance.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/Sharan-s-Blog/assets/main.css">
+  <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://sharan19.github.io/Sharan-s-Blog/feed.xml" title="Sharan's Blog" />
+
+  <script>
+  function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+  }
+  window.onload = wrap_img;
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      // add link icon to anchor tags
+      var elem = document.querySelectorAll(".anchor-link")
+      elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+      // remove paragraph tags in rendered toc (happens from notebooks)
+      var toctags = document.querySelectorAll(".toc-entry")
+      toctags.forEach(e => (e.firstElementChild.innerText = e.firstElementChild.innerText.replace('¶', '')))
+    });
+  </script>
+</head><body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/Sharan-s-Blog/">Sharan&#39;s Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/Sharan-s-Blog/about/">About Me</a><a class="page-link" href="/Sharan-s-Blog/search/">Search</a><a class="page-link" href="/Sharan-s-Blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">My Sales Performance</h1><p class="page-description">This notebook is to analyse my sales perfomance from 2018 september, the date i joined my organisation.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-03-27T00:00:00-05:00" itemprop="datePublished">
+        Mar 27, 2020
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Sharan Kumar</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/Sharan-s-Blog/categories/#fastpages">fastpages</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Sharan-s-Blog/categories/#CNC">CNC</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Sharan-s-Blog/categories/#Sales">Sales</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Sharan-s-Blog/categories/#Haas">Haas</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Sharan-s-Blog/categories/#Forecasting">Forecasting</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Sharan-s-Blog/categories/#VMC">VMC</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Sharan-s-Blog/categories/#colab">colab</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+<a href="https://github.com/sharan19/Sharan-s-Blog/tree/master/_notebooks/2020_03_26_Sharan_Sales_Performance.ipynb" role="button">
+    <img class="notebook-badge-image" src="https://img.shields.io/static/v1?label=&message=View%20On%20GitHub&color=586069&logo=github&labelColor=2f363d">
+</a>
+</div><div class="px-2">
+    <a href="https://colab.research.google.com/github/sharan19/Sharan-s-Blog/blob/master/_notebooks/2020_03_26_Sharan_Sales_Performance.ipynb">
+        <img class="notebook-badge-image" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020_03_26_Sharan_Sales_Performance.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Liberaries which we are going to use are mentioned. Any additional libraries will be added as and when required</span>
+<span class="c1"># Pandas library is for basic operations like print, write , read , merge etc., so i add them in all notebooks</span>
+<span class="c1"># Numpy library is for mathematical operations</span>
+<span class="c1"># Matplotlib is for creating plots,  graphs and visual representation to better understand our findings</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="o">%</span> <span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="c1"># The last line is to ensure the plots open in same window instead of seperate window</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We are creating a dataframe, which will hold the data. In this case the data is in an excel sheet.</span>
+<span class="c1">#for an earlier version of Excel, you may need to use the file extension of &#39;xls&#39;</span>
+<span class="c1"># We can give any name for the the data frame we created but I am giving the name df for shortform of dataframe</span>
+<span class="c1"># (i know it&#39;s obvious but nevermind ). header =1 to mention that the first row is column name</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span> <span class="p">(</span><span class="sa">r</span><span class="s1">&#39;C:\Users\sharan\Desktop\office\Sharan Performance.xlsx&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="c1">#df=df.to_string(index=False)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>                    Customer Machine     Month  Year         Sector  \
+0          Limat Engineering    VF-4  February  2019       toolroom   
+1             DMV Industries    VF-4       May  2019  die and mould   
+2                    Sosher     VF-2      July  2019       toolroom   
+3                    Sosher   ST 20Y      July  2019       toolroom   
+4                   Texcel Q    VF-2    August  2019     production   
+5               Rapid ProMac    VF-4  December  2019     production   
+6  Royal Casting Engineering    VF-4   January  2020  die and mould   
+7               Rapid ProMac    VF-2  February  2020     production   
+
+        Region  Previous machine Stock machine  
+0      Chennai                 0            No  
+1      Chennai                 0            No  
+2  Kanchipuram                 0            No  
+3  Kanchipuram                 0            No  
+4  Kanchipuram                 7           Yes  
+5      Chennai                 2           Yes  
+6  Thiruvallur                 0            No  
+7      Chennai                 3           Yes  
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The above list contains list of customers who purchased haas machines from Me, Sharan Kumar.
+The columns are:</p>
+<p>Customer: Customer name</p>
+<p>Machine : Machine purchased from me</p>
+<p>Month   : Month of purchase</p>
+<p>Year    : Year of purchase</p>
+<p>Sector  : Sector in which customer works in</p>
+<p>Region  : District in which the company is located</p>
+<p>Previous machine: Previous machine in same catagory the customer has. For example, if he is purchasing VMC then the table will 
+have number of VMCs.</p>
+<p>Stock machine : Whether the machine already exisitng in our stock or they had to be imported.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Customer            object
+Machine             object
+Month               object
+Year                 int64
+Sector              object
+Region              object
+Previous machine     int64
+Stock machine       object
+dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Customer&#39;</span><span class="p">,</span><span class="s1">&#39;Machine&#39;</span><span class="p">,</span><span class="s1">&#39;Month&#39;</span><span class="p">,</span><span class="s1">&#39;Sector&#39;</span><span class="p">,</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span><span class="s1">&#39;Stock machine&#39;</span><span class="p">]]</span><span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Customer&#39;</span><span class="p">,</span><span class="s1">&#39;Machine&#39;</span><span class="p">,</span><span class="s1">&#39;Month&#39;</span><span class="p">,</span><span class="s1">&#39;Sector&#39;</span><span class="p">,</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span><span class="s1">&#39;Stock machine&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#convert_dict={&#39;Customer&#39;:str,&#39;Machine&#39;:str,&#39;Month&#39;:str,&#39;sector&#39;:str, &#39;region&#39;:str,&#39;Stock machine&#39;:str}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#df = df.astype(convert_dict) </span>
+<span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Customer            object
+Machine             object
+Month               object
+Year                 int64
+Sector              object
+Region              object
+Previous machine     int64
+Stock machine       object
+dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Number of machines sold in 2018:&quot;</span><span class="p">,</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Machine&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Year</span><span class="o">==</span><span class="mi">2018</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre> Number of machines sold in 2018: 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of machines sold in 2019:&quot;</span><span class="p">,</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Machine&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Year</span><span class="o">==</span><span class="mi">2019</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Different machines sold in 2019:&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Machine&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Year</span><span class="o">==</span><span class="mi">2019</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Number of machines sold in 2019: 6
+
+Different machines sold in 2019:
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>VF-4      3
+VF-2      2
+ST 20Y    1
+Name: Machine, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of machines sold in 2020:&quot;</span><span class="p">,</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Machine&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Year</span><span class="o">==</span><span class="mi">2020</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Different machines sold in 2020:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Machine&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Year</span><span class="o">==</span><span class="mi">2020</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">* Made till end of February&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Number of machines sold in 2020: 2 *
+
+Different machines sold in 2020:
+
+VF-4    1
+VF-2    1
+Name: Machine, dtype: int64
+
+* Made till end of february
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Total number of machines sold:&quot;</span><span class="p">,</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Machine&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre> Total number of machines sold: 8
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Different machines sold:&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)[</span><span class="s1">&#39;Machine&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Different machines sold:
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Year  Machine
+2019  VF-4       3
+      VF-2       2
+      ST 20Y     1
+2020  VF-2       1
+      VF-4       1
+Name: Machine, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I have been part of manav marketing since 2018 september that means I have been in company for 4 months in 2018. I have sold 6  machines in 2019 and 2 machine in 2020. The most sold machine is VF-4.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="sharan19/Sharan-s-Blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/Sharan-s-Blog/fastpages/cnc/sales/haas/forecasting/vmc/colab/2020/03/27/_03_26_Sharan_Sales_Performance.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/Sharan-s-Blog/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Sharan&#39;s Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Sharan&#39;s Blog</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list">
+  <li><a href="https://github.com/sharan19"><svg class="social svg-icon"><use xlink:href="/Sharan-s-Blog/assets/minima-social-icons.svg#github"></use></svg> <span class="username">sharan19</span></a></li><li><a href="https://www.linkedin.com/in/amsharan"><svg class="social svg-icon"><use xlink:href="/Sharan-s-Blog/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">amsharan</span></a></li><li><a href="https://www.twitter.com/amsharan"><svg class="social svg-icon"><use xlink:href="/Sharan-s-Blog/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">amsharan</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Sharan&#39;s programming and self documentaion site</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
