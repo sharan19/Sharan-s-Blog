@@ -1,163 +1,290 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://sharan19.github.io/Sharan-s-Blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sharan19.github.io/Sharan-s-Blog/" rel="alternate" type="text/html" /><updated>2020-03-31T11:24:10-05:00</updated><id>https://sharan19.github.io/Sharan-s-Blog/feed.xml</id><title type="html">Sharan’s Blog</title><subtitle>Sharan's programming and self documentaion site</subtitle><entry><title type="html">CNC vs VMC</title><link href="https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/lathe/vmc/jupyter/2020/03/31/CNC-vs-VMC.html" rel="alternate" type="text/html" title="CNC vs VMC" /><published>2020-03-31T00:00:00-05:00</published><updated>2020-03-31T00:00:00-05:00</updated><id>https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/lathe/vmc/jupyter/2020/03/31/CNC-vs-VMC</id><content type="html" xml:base="https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/lathe/vmc/jupyter/2020/03/31/CNC-vs-VMC.html">&lt;!--
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="shortcut icon" type="image/x-icon" href="/Sharan-s-Blog/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>CNC vs VMC | Sharan’s Blog</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="CNC vs VMC" />
+<meta name="author" content="Sharan Kumar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This notebook creates image classifier to distinguish between CNC lathes which are sometimes called CNCs and Vertical Machining centers which are called VMCs" />
+<meta property="og:description" content="This notebook creates image classifier to distinguish between CNC lathes which are sometimes called CNCs and Vertical Machining centers which are called VMCs" />
+<link rel="canonical" href="https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/lathe/vmc/jupyter/2020/03/31/CNC-vs-VMC.html" />
+<meta property="og:url" content="https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/lathe/vmc/jupyter/2020/03/31/CNC-vs-VMC.html" />
+<meta property="og:site_name" content="Sharan’s Blog" />
+<meta property="og:image" content="https://sharan19.github.io/Sharan-s-Blog/images/some_folder/your_image.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-31T00:00:00-05:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Sharan Kumar"},"description":"This notebook creates image classifier to distinguish between CNC lathes which are sometimes called CNCs and Vertical Machining centers which are called VMCs","@type":"BlogPosting","headline":"CNC vs VMC","dateModified":"2020-03-31T00:00:00-05:00","datePublished":"2020-03-31T00:00:00-05:00","url":"https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/lathe/vmc/jupyter/2020/03/31/CNC-vs-VMC.html","image":"https://sharan19.github.io/Sharan-s-Blog/images/some_folder/your_image.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/lathe/vmc/jupyter/2020/03/31/CNC-vs-VMC.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/Sharan-s-Blog/assets/main.css">
+  <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://sharan19.github.io/Sharan-s-Blog/feed.xml" title="Sharan's Blog" />
+
+  <script>
+  function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+  }
+  window.onload = wrap_img;
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      // add link icon to anchor tags
+      var elem = document.querySelectorAll(".anchor-link")
+      elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+      // remove paragraph tags in rendered toc (happens from notebooks)
+      var toctags = document.querySelectorAll(".toc-entry")
+      toctags.forEach(e => (e.firstElementChild.innerText = e.firstElementChild.innerText.replace('¶', '')))
+    });
+  </script>
+</head><body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/Sharan-s-Blog/">Sharan&#39;s Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/Sharan-s-Blog/about/">About Me</a><a class="page-link" href="/Sharan-s-Blog/search/">Search</a><a class="page-link" href="/Sharan-s-Blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">CNC vs VMC</h1><p class="page-description">This notebook creates image classifier to distinguish between CNC lathes which are sometimes called CNCs and Vertical Machining centers which are called VMCs</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-03-31T00:00:00-05:00" itemprop="datePublished">
+        Mar 31, 2020
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Sharan Kumar</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      77 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/Sharan-s-Blog/categories/#fastpages">fastpages</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Sharan-s-Blog/categories/#CNC">CNC</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Sharan-s-Blog/categories/#lathe">lathe</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Sharan-s-Blog/categories/#VMC">VMC</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Sharan-s-Blog/categories/#jupyter">jupyter</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+<a href="https://github.com/sharan19/Sharan-s-Blog/tree/master/_notebooks/2020-03-31-CNC vs VMC.ipynb" role="button">
+    <img class="notebook-badge-image" src="https://img.shields.io/static/v1?label=&message=View%20On%20GitHub&color=586069&logo=github&labelColor=2f363d">
+</a>
+</div><div class="px-2">
+    <a href="https://colab.research.google.com/github/sharan19/Sharan-s-Blog/blob/master/_notebooks/2020-03-31-CNC vs VMC.ipynb">
+        <img class="notebook-badge-image" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
 # file to edit: _notebooks/2020-03-31-CNC vs VMC.ipynb
---&gt;
+-->
 
-&lt;div class=&quot;container&quot; id=&quot;notebook-container&quot;&gt;
+<div class="container" id="notebook-container">
         
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## HI this is sharan creating. VMC Vs CNC image classifier. &lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;##  Used Fast.AI library for this.&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## HI this is sharan creating. VMC Vs CNC image classifier. </span>
+<span class="c1">##  Used Fast.AI library for this.</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;pip install icrawler
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install icrawler
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Collecting icrawler
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Collecting icrawler
   Downloading https://files.pythonhosted.org/packages/78/a2/1ac26a2c39b87bef4ef8cb39cb4f33e04041f4a9f04f8cc3dfa1251e0304/icrawler-0.6.2-py2.py3-none-any.whl
-Requirement already satisfied: six&amp;gt;=1.10.0 in /usr/local/lib/python3.6/dist-packages (from icrawler) (1.12.0)
+Requirement already satisfied: six&gt;=1.10.0 in /usr/local/lib/python3.6/dist-packages (from icrawler) (1.12.0)
 Requirement already satisfied: lxml in /usr/local/lib/python3.6/dist-packages (from icrawler) (4.2.6)
-Requirement already satisfied: requests&amp;gt;=2.9.1 in /usr/local/lib/python3.6/dist-packages (from icrawler) (2.21.0)
+Requirement already satisfied: requests&gt;=2.9.1 in /usr/local/lib/python3.6/dist-packages (from icrawler) (2.21.0)
 Requirement already satisfied: Pillow in /usr/local/lib/python3.6/dist-packages (from icrawler) (4.3.0)
-Requirement already satisfied: beautifulsoup4&amp;gt;=4.4.1 in /usr/local/lib/python3.6/dist-packages (from icrawler) (4.6.3)
-Requirement already satisfied: urllib3&amp;lt;1.25,&amp;gt;=1.21.1 in /usr/local/lib/python3.6/dist-packages (from requests&amp;gt;=2.9.1-&amp;gt;icrawler) (1.24.3)
-Requirement already satisfied: chardet&amp;lt;3.1.0,&amp;gt;=3.0.2 in /usr/local/lib/python3.6/dist-packages (from requests&amp;gt;=2.9.1-&amp;gt;icrawler) (3.0.4)
-Requirement already satisfied: idna&amp;lt;2.9,&amp;gt;=2.5 in /usr/local/lib/python3.6/dist-packages (from requests&amp;gt;=2.9.1-&amp;gt;icrawler) (2.8)
-Requirement already satisfied: certifi&amp;gt;=2017.4.17 in /usr/local/lib/python3.6/dist-packages (from requests&amp;gt;=2.9.1-&amp;gt;icrawler) (2019.6.16)
-Requirement already satisfied: olefile in /usr/local/lib/python3.6/dist-packages (from Pillow-&amp;gt;icrawler) (0.46)
+Requirement already satisfied: beautifulsoup4&gt;=4.4.1 in /usr/local/lib/python3.6/dist-packages (from icrawler) (4.6.3)
+Requirement already satisfied: urllib3&lt;1.25,&gt;=1.21.1 in /usr/local/lib/python3.6/dist-packages (from requests&gt;=2.9.1-&gt;icrawler) (1.24.3)
+Requirement already satisfied: chardet&lt;3.1.0,&gt;=3.0.2 in /usr/local/lib/python3.6/dist-packages (from requests&gt;=2.9.1-&gt;icrawler) (3.0.4)
+Requirement already satisfied: idna&lt;2.9,&gt;=2.5 in /usr/local/lib/python3.6/dist-packages (from requests&gt;=2.9.1-&gt;icrawler) (2.8)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.6/dist-packages (from requests&gt;=2.9.1-&gt;icrawler) (2019.6.16)
+Requirement already satisfied: olefile in /usr/local/lib/python3.6/dist-packages (from Pillow-&gt;icrawler) (0.46)
 Installing collected packages: icrawler
 Successfully installed icrawler-0.6.2
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;icrawler.builtin&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BingImageCrawler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GoogleImageCrawler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;logging&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">icrawler.builtin</span> <span class="kn">import</span> <span class="p">(</span><span class="n">BingImageCrawler</span><span class="p">,</span> <span class="n">GoogleImageCrawler</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keyword&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Vertical maching center&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">keyword</span> <span class="o">=</span> <span class="s1">&#39;Vertical maching center&#39;</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;mkdir VMCvsCNC
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>mkdir VMCvsCNC
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#hide_output&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;VMCvsCNC&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;./content/VMC&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;search_filters_google&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#hide_output</span>
+<span class="n">VMCvsCNC</span> <span class="o">=</span><span class="s1">&#39;./content/VMC&#39;</span>
+<span class="n">search_filters_google</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
-&lt;span class=&quot;n&quot;&gt;google_crawler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GoogleImageCrawler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;downloader_threads&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;storage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;root_dir&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VMCvsCNC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log_level&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logging&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INFO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;google_crawler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;crawl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keyword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keyword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;search_filters_google&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max_num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<span class="n">google_crawler</span> <span class="o">=</span> <span class="n">GoogleImageCrawler</span><span class="p">(</span><span class="n">downloader_threads</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">storage</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;root_dir&#39;</span><span class="p">:</span> <span class="n">VMCvsCNC</span><span class="p">},</span><span class="n">log_level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">google_crawler</span><span class="o">.</span><span class="n">crawl</span><span class="p">(</span><span class="n">keyword</span><span class="o">=</span><span class="n">keyword</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="n">search_filters_google</span><span class="p">,</span> <span class="n">max_num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stderr output_text&quot;&gt;
-&lt;pre&gt;2019-09-30 03:07:58,327 - INFO - icrawler.crawler - start crawling...
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2019-09-30 03:07:58,327 - INFO - icrawler.crawler - start crawling...
 2019-09-30 03:07:58,332 - INFO - icrawler.crawler - starting 1 feeder threads...
 2019-09-30 03:07:58,336 - INFO - icrawler.crawler - starting 1 parser threads...
 2019-09-30 03:07:58,338 - INFO - icrawler.crawler - starting 4 downloader threads...
-2019-09-30 03:07:58,973 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;amp;ijn=0&amp;amp;start=0&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:07:58,973 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;ijn=0&amp;start=0&amp;tbs=&amp;tbm=isch
 2019-09-30 03:07:59,107 - INFO - downloader - image #1	https://www.normanmachinetool.com/wp-content/uploads/2019/03/8441-HAAS-VF-2D-CNC-3-AXIS-VERTICAL-MILLING-MACHINE-1.jpg
 2019-09-30 03:07:59,204 - INFO - downloader - image #2	https://images-na.ssl-images-amazon.com/images/I/61-TUPlQpOL._SX466_.jpg
 2019-09-30 03:07:59,293 - INFO - downloader - image #3	https://vixkbjgsij-flywheel.netdna-ssl.com/wp-content/uploads/2018/05/Kent-CNC-KVR-4020A-Vertical-Machining-Center.png
@@ -203,7 +330,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:08:05,741 - INFO - downloader - image #42	https://vanderzielmachinery.com/wp-content/uploads/2019/02/13976a.jpg
 2019-09-30 03:08:05,774 - INFO - downloader - image #43	https://i.ytimg.com/vi/CqePrbeAQoM/maxresdefault.jpg
 2019-09-30 03:08:06,278 - INFO - downloader - image #44	https://www.machinestation.us/wp-content/uploads/2019/05/Used-Hardinge-VMC-1250II-CNC-Vertical-Machining-Center-for-Sale-in-California.jpg
-2019-09-30 03:08:06,781 - INFO - downloader - image #45	https://634029.smushcdn.com/1241545/wp-content/uploads/2019/05/Haas-VF-7-40-2.jpg?size=2000x1200&amp;amp;lossy=1&amp;amp;strip=1&amp;amp;webp=1
+2019-09-30 03:08:06,781 - INFO - downloader - image #45	https://634029.smushcdn.com/1241545/wp-content/uploads/2019/05/Haas-VF-7-40-2.jpg?size=2000x1200&amp;lossy=1&amp;strip=1&amp;webp=1
 2019-09-30 03:08:06,906 - INFO - downloader - image #46	https://confidenceautomation.com/wp-content/uploads/2019/06/Fannuc.png
 2019-09-30 03:08:07,030 - INFO - downloader - image #47	https://automatecnc.com/sites/default/files/vmc425withoutbanner500.png
 2019-09-30 03:08:07,035 - INFO - downloader - image #48	https://www.aero-mag.com/wp-content/uploads/2019/04/Mills-CNC-introduces-new-vertical-machining-centre-with-a-2.1m-X-axis-1024x683.jpg
@@ -233,7 +360,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:08:10,150 - INFO - downloader - image #72	https://image.made-in-china.com/2f0j00rYDUWVPRjzkf/Vmc640lh-Vertical-Machining-Center-Good-Price.jpg
 2019-09-30 03:08:10,517 - INFO - downloader - image #73	http://mande.com/wp-content/uploads/2017/08/hurco-vertical-vmcs.jpg
 2019-09-30 03:08:10,562 - INFO - downloader - image #74	http://www.shanyicnc.com/uploads/201811234/vmc500-con-rod-cylinder-block-cnc-milling201807111020184882218.jpg
-2019-09-30 03:08:10,639 - INFO - downloader - image #75	https://i1.wp.com/leadingedgeindustrial.com/wp-content/uploads/2016/03/HX8610-VMC-Shop.png?zoom=2.625&amp;amp;fit=100%2C100&amp;amp;ssl=1
+2019-09-30 03:08:10,639 - INFO - downloader - image #75	https://i1.wp.com/leadingedgeindustrial.com/wp-content/uploads/2016/03/HX8610-VMC-Shop.png?zoom=2.625&amp;fit=100%2C100&amp;ssl=1
 2019-09-30 03:08:10,720 - INFO - downloader - image #76	https://s3.amazonaws.com/machine-hub-prod/machine-listing-images/orca-new-machines/KVR-85-1563806401-108.jpg
 2019-09-30 03:08:10,861 - INFO - downloader - image #77	http://www.hhrobertsmachinery.com/Topwell/HV/TW-HV-open-275.gif
 2019-09-30 03:08:11,142 - INFO - downloader - image #78	https://www.southwesternindustries.com/assets/images/products/trak-2op-three-quarter-view-hero.png?r=5
@@ -252,7 +379,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:08:12,781 - INFO - downloader - image #91	https://s3.amazonaws.com/machine-hub-prod/machine-listing-images/199c79ae66904c729433196aad9ee951-656bfad6fe5ce427df7da07e24b56573.jpeg
 2019-09-30 03:08:12,866 - INFO - downloader - image #92	http://m.aihuimachinery.com/uploads/201921073/vertical-machining-center49405578499.jpg
 2019-09-30 03:08:13,109 - INFO - downloader - image #93	https://40awy91x972d12ykiu3lenk2-wpengine.netdna-ssl.com/wp-content/uploads/2019/07/Hurco-VMX24HSi-High-Speed-Vertical-Machining-Center.png
-2019-09-30 03:08:13,315 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;amp;ijn=1&amp;amp;start=100&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:08:13,315 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;ijn=1&amp;start=100&amp;tbs=&amp;tbm=isch
 2019-09-30 03:08:13,428 - INFO - downloader - image #94	https://www.interempresas.net/FotosArtProductos/P43959.jpg
 2019-09-30 03:08:13,459 - INFO - downloader - image #95	https://advancedmachinery.com/wp-content/uploads/2019/04/Milltronics-VM30XP-50-taper-60x30-Used-CNC-Vertical-Machining-Center1.jpg
 2019-09-30 03:08:13,698 - INFO - downloader - image #96	https://www.fadal.com/images/2017/03/22/vmc2015.png
@@ -277,13 +404,13 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:08:16,505 - INFO - downloader - image #114	http://www.mtt-technology.it/wp-content/uploads/2019/02/twiser-685-macchina-a-bancale-fisso-1.jpg
 2019-09-30 03:08:16,533 - INFO - downloader - image #115	https://www.industry-plaza.com/img/vertical-machining-center-60-cnc-000068065-product_zoom.gif
 2019-09-30 03:08:17,155 - INFO - downloader - image #116	http://hub.exapro.com/wp-content/uploads/2017/05/Mazak-vertical-machining-center-300x207.png
-2019-09-30 03:08:17,223 - INFO - downloader - image #117	https://www.southernfabsales.com/hs-fs/hubfs/Wide%20Range%20Shot%20of%20a%20Vertical%20Machining%20Center.jpeg?width=600&amp;amp;name=Wide%20Range%20Shot%20of%20a%20Vertical%20Machining%20Center.jpeg
+2019-09-30 03:08:17,223 - INFO - downloader - image #117	https://www.southernfabsales.com/hs-fs/hubfs/Wide%20Range%20Shot%20of%20a%20Vertical%20Machining%20Center.jpeg?width=600&amp;name=Wide%20Range%20Shot%20of%20a%20Vertical%20Machining%20Center.jpeg
 2019-09-30 03:08:17,320 - INFO - downloader - image #118	https://www.taiwanexcellence.org/upload/product/old/2019/2019_JA048_L.jpg
 2019-09-30 03:08:17,468 - ERROR - downloader - Response status code 404, file https://www.hurco.com/en-us/cnc-machine-tools/machining-centers/vertical/PublishingImages/VMX84i-frame-angle-web.jpg
 2019-09-30 03:08:17,534 - INFO - downloader - image #119	https://cpimg.tistatic.com/05163552/b/4/Bridgeport-VMC-500-Vertical-Machining-Center.jpg
 2019-09-30 03:08:17,676 - INFO - downloader - image #120	http://okkcorp.com/wp-content/uploads/2016/10/VC-X500.png
 2019-09-30 03:08:17,866 - INFO - downloader - image #121	http://yuasa-intl.com/wp-content/uploads/2017/08/VP600-01-532_470-1.png
-2019-09-30 03:08:17,993 - INFO - downloader - image #122	http://www.todaysmedicaldevelopments.com/fileuploads/image/2019/07/16/hurco-vmx-vertical-machining-centers.jpg?w=736&amp;amp;scale=width
+2019-09-30 03:08:17,993 - INFO - downloader - image #122	http://www.todaysmedicaldevelopments.com/fileuploads/image/2019/07/16/hurco-vmx-vertical-machining-centers.jpg?w=736&amp;scale=width
 2019-09-30 03:08:18,008 - INFO - downloader - image #123	https://vixkbjgsij-flywheel.netdna-ssl.com/wp-content/uploads/2018/06/Kent-CNC-Linear-Way-Vertical-Machining-Center.png
 2019-09-30 03:08:18,329 - INFO - downloader - image #124	https://www.blumbergmachinery.com/wp-content/uploads/14653_58466.jpg
 2019-09-30 03:08:18,337 - INFO - downloader - image #125	https://budsmachinetools.com/wp-content/uploads/2017/03/Fadal-VMC-3320-R-II.jpg
@@ -294,7 +421,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:08:19,207 - INFO - downloader - image #130	https://media.machines4u.com.au/machinery/93/459393/Doosan-VM-960L-CNC-Vertical-Machining-Center-2016-model-_22456042.l.jpg
 2019-09-30 03:08:19,742 - INFO - downloader - image #131	https://5.imimg.com/data5/DE/AR/MY-3306239/compact-vertical-machining-center-250x250.png
 2019-09-30 03:08:20,133 - INFO - downloader - image #132	http://www.tampereenkonepajat.com/wp-content/uploads/2018/02/IMG_1461.jpg
-2019-09-30 03:08:20,304 - INFO - downloader - image #133	https://www.makino.com/makino-us/media/general/F9-mini.png?ext=.png&amp;amp;maxsidesize=960&amp;amp;resizemode=force
+2019-09-30 03:08:20,304 - INFO - downloader - image #133	https://www.makino.com/makino-us/media/general/F9-mini.png?ext=.png&amp;maxsidesize=960&amp;resizemode=force
 2019-09-30 03:08:20,453 - INFO - downloader - image #134	https://www.knuth-usa.com/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/1/8/182240_hpt_fs_1.jpg
 2019-09-30 03:08:20,574 - INFO - downloader - image #135	https://www.okuma.co.jp/english/product/5avmc/images/mu-s600v/i_main_sp.jpg
 2019-09-30 03:08:20,975 - INFO - downloader - image #136	https://images.vogel.de/vogelonline/bdb/829900/829987/4.jpg
@@ -353,7 +480,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:08:31,998 - INFO - downloader - image #188	https://www.interempresas.net/FotosArtProductos/P18081.jpg
 2019-09-30 03:08:32,128 - INFO - downloader - image #189	https://tradermachinery.com/images/products/24-x-25-y-20-z-milltronics-tt24-vertical-machining-center-2007-1.jpg
 2019-09-30 03:08:32,378 - INFO - downloader - image #190	https://confidenceautomation.com/wp-content/uploads/2019/07/vertical-machining-litz-768x576.jpg
-2019-09-30 03:08:32,435 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;amp;ijn=2&amp;amp;start=200&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:08:32,435 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;ijn=2&amp;start=200&amp;tbs=&amp;tbm=isch
 2019-09-30 03:08:32,760 - INFO - downloader - image #191	https://image.crov.com/pd8-KrDdVRJjjYbh/cnc-vertical-machining-center-cnc-milling-machine.jpg
 2019-09-30 03:08:32,993 - INFO - downloader - image #192	https://cdn.ready-market.com/101/f6cdccdf//Templates/pic/m/IMG-Used-CNC-Machining-Centers.jpg?v=2ce02913
 2019-09-30 03:08:33,144 - INFO - downloader - image #193	https://machinesused.s3.amazonaws.com/1/2019/6/medium/1fd707031c614ad8b635fc79dc8048b9
@@ -377,7 +504,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:08:35,245 - INFO - downloader - image #211	https://www.hfomachinetools.com/wp-content/uploads/2016/06/16Web_UMC-750_160816.jpg
 2019-09-30 03:08:35,647 - INFO - downloader - image #212	https://i.machinio.com/medium/mch/2d6850bd809a49e3a13fe9ded71edc94.jpg
 2019-09-30 03:08:35,827 - INFO - downloader - image #213	https://5.imimg.com/data5/HG/MT/XJ/SELLER-357256/cnc-double-column-machining-center-500x500.jpg
-2019-09-30 03:08:35,995 - INFO - downloader - image #214	https://img.twa.nl/12990811?width=600&amp;amp;height=450&amp;amp;watermark=none
+2019-09-30 03:08:35,995 - INFO - downloader - image #214	https://img.twa.nl/12990811?width=600&amp;height=450&amp;watermark=none
 2019-09-30 03:08:36,078 - INFO - downloader - image #215	https://res.surplex.com/images/c_fill,d_no_image.png,f_auto,fl_progressive,h_346,q_auto,w_536/i_03670918/STAMA_MC_531S_Vertical_Machining_Center.jpg
 2019-09-30 03:08:36,146 - INFO - downloader - image #216	https://im01.itaiwantrade.com/bccb2a1e-a9ba-46d6-99db-5a1509e5b704/1-09.jpg
 2019-09-30 03:08:36,361 - INFO - downloader - image #217	https://checkout.labx.com/pub/media/catalog/product/s/u/supermax-cnc-vertical-machining-center-model-fv102a_f_848857_LV39567751_29257.jpg
@@ -390,7 +517,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:08:37,661 - INFO - downloader - image #224	http://okkcorp.com/wp-content/uploads/2016/07/VB53.png
 2019-09-30 03:08:37,836 - INFO - downloader - image #225	https://clarkmachinerysales.com/wp-content/uploads/2019/05/488695a.jpg
 2019-09-30 03:08:38,057 - INFO - downloader - image #226	http://www.jeenxi.com.tw/proimages/cs/pro/Vertical-Machining-Center-02.png
-2019-09-30 03:08:38,278 - INFO - downloader - image #227	https://www.makino.com/makino-us/media/general/machine-menu-graphite.png?ext=.png&amp;amp;maxsidesize=960&amp;amp;resizemode=force
+2019-09-30 03:08:38,278 - INFO - downloader - image #227	https://www.makino.com/makino-us/media/general/machine-menu-graphite.png?ext=.png&amp;maxsidesize=960&amp;resizemode=force
 2019-09-30 03:08:38,366 - INFO - downloader - image #228	http://www.estampro.com/sites/default/files/styles/image_de_caroussel_de_contenu/public/upload/2017/08/okuma_genos_m560-v-2_1.jpg?itok=HQD4jafa
 2019-09-30 03:08:38,472 - INFO - downloader - image #229	https://www.makinaalsat.com/Dosyalar/Ilan/cnc-vertical-machining-center-dosan-nm-510_88446_thumb.jpg
 2019-09-30 03:08:39,250 - INFO - downloader - image #230	https://cdn.komachine.com/media/product/hwacheon_30352_axvysz.jpg
@@ -413,7 +540,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:08:41,883 - INFO - downloader - image #247	https://520machinerywest.com/wp-content/uploads/2018/06/2007-Hurco-VMX-42-VMC-Overall-300x212.jpg
 2019-09-30 03:08:41,952 - INFO - downloader - image #248	https://www.picclickimg.com/d/l400/pict/173926579883_/2016-Haas-Vf-2Ss-Cnc-Mill-Vertical-Machining-Center.jpg
 2019-09-30 03:08:42,113 - INFO - downloader - image #249	https://www.interempresas.net/FotosArtProductos/P50273.jpg
-2019-09-30 03:08:42,180 - INFO - downloader - image #250	https://www.southernfabsales.com/hs-fs/hubfs/Vertical%20Machining%20Center%20VMC.jpg?width=217&amp;amp;height=321&amp;amp;name=Vertical%20Machining%20Center%20VMC.jpg
+2019-09-30 03:08:42,180 - INFO - downloader - image #250	https://www.southernfabsales.com/hs-fs/hubfs/Vertical%20Machining%20Center%20VMC.jpg?width=217&amp;height=321&amp;name=Vertical%20Machining%20Center%20VMC.jpg
 2019-09-30 03:08:42,250 - INFO - downloader - image #251	https://www.jamestownmachinery.com/wp-content/uploads/2017/09/MZ_VCN-510C_13_JM170802_Front_Door_Closed.jpg
 2019-09-30 03:08:42,271 - INFO - downloader - image #252	https://media.istockphoto.com/photos/vertical-machining-center-3-axis-universal-milling-industrial-of-cnc-picture-id1149113772
 2019-09-30 03:08:42,385 - INFO - downloader - image #253	https://i.ebayimg.com/00/s/NzAzWDUxNA==/z/j6cAAOSwsYtclFjl/$_57.JPG?set_id=8800005007
@@ -428,7 +555,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:08:44,541 - INFO - downloader - image #262	https://cdn.makinate.com/used-dart-vmc-650-xl-800-twin-speed-vertical-machining-center-m1802929723/photo/web/used-dart-vmc-650-xl-800-twin-speed-vertical-machining-center-3.jpg
 2019-09-30 03:08:44,676 - INFO - downloader - image #263	https://www.cns-srl.com/upld/catalogo/big/centrodilavorokentkmv13yl.jpg
 2019-09-30 03:08:44,702 - INFO - downloader - image #264	https://hilcoindprodstorage.blob.core.windows.net/proj-3996/3996_533593_500.jpg?1567135056
-2019-09-30 03:08:44,843 - INFO - downloader - image #265	https://www.netbid.com/images/11606/X11606-10_1.jpg?w=569&amp;amp;h=427&amp;amp;404=default
+2019-09-30 03:08:44,843 - INFO - downloader - image #265	https://www.netbid.com/images/11606/X11606-10_1.jpg?w=569&amp;h=427&amp;404=default
 2019-09-30 03:08:45,100 - INFO - downloader - image #266	https://industrialbid.com/images/lot/3866/386609_0.jpg?1544589883
 2019-09-30 03:08:45,225 - INFO - downloader - image #267	https://static.spacecrafted.com/cf2802ec0ae24e43a9fccf504751b847/i/de0bf9154746414484efb6c7a7ee9cf2/1/4SoifmQp45JMgBnHm9g4L/KMV-16.jpg
 2019-09-30 03:08:45,344 - INFO - downloader - image #268	https://www.okuma.com/stuff/contentmgr/files/0/f3cefbd9221d09d2d3e7f4c482eb80f4/feature_image/product_pgimage_mu5000v.png
@@ -439,19 +566,19 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:08:45,815 - INFO - downloader - image #272	https://cpimg.tistatic.com/04375623/b/4/MV-3A-YANG-VERTICAL-MACHINING-CENTER.jpg
 2019-09-30 03:08:45,817 - INFO - downloader - image #273	https://www.merrifieldmachinery.com/wp-content/uploads/sites/91/2018/08/af-300x225.jpg
 2019-09-30 03:08:45,877 - INFO - downloader - image #274	https://image.shutterstock.com/image-photo/vertical-machining-center-3-axis-600w-646244254.jpg
-2019-09-30 03:08:46,413 - INFO - downloader - image #275	https://img.twa.nl/12990821?width=600&amp;amp;height=450&amp;amp;watermark=none
+2019-09-30 03:08:46,413 - INFO - downloader - image #275	https://img.twa.nl/12990821?width=600&amp;height=450&amp;watermark=none
 2019-09-30 03:08:46,582 - INFO - downloader - image #276	https://www.doosanmachinetools.us/imager/www_doosanmachinetools_us/uploads/images/VC3600_3e83dd1452d123e9242cf80e6b699c9a.png
 2019-09-30 03:08:46,680 - INFO - downloader - image #277	https://www.fanuc.eu/~/media/corporate/products/robodrill/robodrill-new/landing%20page/fea-pr-rd-vertical.jpg
 2019-09-30 03:08:46,762 - INFO - downloader - image #278	https://www.multistation.com/voy_content/uploads/sites/2/2018/11/hamuel_1.jpg
 2019-09-30 03:08:47,146 - INFO - downloader - image #279	https://www.bestmadeinkorea.com/photo/2015/cam-box-for-tool-changer-of-vertical-machining-center-madeinkorea-big1000x1000-KSE_3560.jpg
 2019-09-30 03:08:47,484 - INFO - downloader - image #280	http://www.gmvmacchine.com/dati/CatalogoOnLine/upload/img/dealer-vertical-machining-center-DYNA-MECHTRONICS-DM4800C-used---DYNAMITE%20DM4800.jpg
 2019-09-30 03:08:47,802 - INFO - downloader - image #281	https://advancedmachinery.com/wp-content/uploads/2019/07/Milltronics-Model-RW15-3-Axis-CNC-Vertical-Machining-Center1.jpg
-2019-09-30 03:08:48,059 - INFO - downloader - image #282	https://www.aerospacemanufacturinganddesign.com/FileUploads/image/products/201415/VMC850E.jpg?w=400&amp;amp;&amp;amp;scale=width
+2019-09-30 03:08:48,059 - INFO - downloader - image #282	https://www.aerospacemanufacturinganddesign.com/FileUploads/image/products/201415/VMC850E.jpg?w=400&amp;&amp;scale=width
 2019-09-30 03:08:48,371 - INFO - downloader - image #283	https://www.phbcorp.com/wp-content/uploads/2018/03/reddog-gallery2.jpg
 2019-09-30 03:08:48,423 - INFO - downloader - image #284	https://img.youtube.com/vi/cW3BRE1WDRc/0.jpg
 2019-09-30 03:08:48,812 - INFO - downloader - image #285	https://www.enshu.co.jp/global/wp-content/uploads/2016/06/kk_ev450te.jpg
 2019-09-30 03:08:48,931 - INFO - downloader - image #286	https://www.mtwmag.com/wp-content/uploads/2016/09/Twin-spindle-Vertical-Machining-Center-BFW.jpg
-2019-09-30 03:08:48,941 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;amp;ijn=3&amp;amp;start=300&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:08:48,941 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;ijn=3&amp;start=300&amp;tbs=&amp;tbm=isch
 2019-09-30 03:08:49,010 - INFO - downloader - image #287	https://www.researchgate.net/profile/Alexandre_Andrade7/publication/321398340/figure/fig1/AS:566547808174080@1512086931448/ROMI-D1250-vertical-machining-center-Source-romicom.png
 2019-09-30 03:08:49,107 - INFO - downloader - image #288	https://www.americanmachinist.com/sites/americanmachinist.com/files/styles/article_featured_retina/public/uploads/2010/08/86197romijpg00000058822.jpg?itok=qvEp353P
 2019-09-30 03:08:49,143 - INFO - downloader - image #289	https://i.ebayimg.com/images/g/DjgAAOSwDcpZsvbA/s-l300.jpg
@@ -462,7 +589,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:08:49,930 - INFO - downloader - image #294	http://topprecision.ro/152-tm_thickbox_default/centru-de-prelucrare-vertical-cnc-pentru-conditii-grele-de-lucru-kamioka-gravity-vmc-2200.jpg
 2019-09-30 03:08:50,041 - ERROR - downloader - Response status code 403, file https://static3.auctelia.com/en/resource/picture/leadwell-vertical-machining-center-430970L.jpg
 2019-09-30 03:08:50,052 - INFO - downloader - image #295	http://matsuurausa.com/wp-content/uploads/images_VX-1500.jpg
-2019-09-30 03:08:50,202 - ERROR - downloader - Exception caught when downloading file http://www.chinavendors.com/upload/cvo/product/l-5-Axis-Vertical-Machining-Center-1513651352508.jpg, error: (&amp;#39;Connection aborted.&amp;#39;, ConnectionResetError(104, &amp;#39;Connection reset by peer&amp;#39;)), remaining retry times: 2
+2019-09-30 03:08:50,202 - ERROR - downloader - Exception caught when downloading file http://www.chinavendors.com/upload/cvo/product/l-5-Axis-Vertical-Machining-Center-1513651352508.jpg, error: (&#39;Connection aborted.&#39;, ConnectionResetError(104, &#39;Connection reset by peer&#39;)), remaining retry times: 2
 2019-09-30 03:08:50,243 - INFO - downloader - image #296	https://cpimg.tistatic.com/04863680/b/5/CNC-Vertical-Machining-Center.jpg
 2019-09-30 03:08:50,296 - INFO - downloader - image #297	http://www.soudogaz.com/wp-content/uploads/2018/10/100_5155.jpg
 2019-09-30 03:08:50,402 - INFO - downloader - image #298	http://www.awea.com/images/homepage/milling_info/af-1250.jpg
@@ -512,7 +639,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:08:58,247 - INFO - downloader - image #341	https://www.satishengineering.com/sites/default/files/styles/watermark_simply/public/SVMC%20012.jpg?itok=dwf_2xFx
 2019-09-30 03:08:58,644 - INFO - downloader - image #342	https://www.topone-m.com/images/mcv-1690_1890-b.jpg
 2019-09-30 03:08:58,665 - INFO - downloader - image #343	https://img.directindustry.com/images_di/projects/images-g/lymco-mv-moving-column-vertical-machining-center-long-narrow-parts-103811-14561707.jpg
-2019-09-30 03:08:58,789 - INFO - downloader - image #344	https://www.todaysmedicaldevelopments.com/FileUploads/image/products/201603/bridgeport-V480-VMC.jpg?w=400&amp;amp;&amp;amp;scale=width
+2019-09-30 03:08:58,789 - INFO - downloader - image #344	https://www.todaysmedicaldevelopments.com/FileUploads/image/products/201603/bridgeport-V480-VMC.jpg?w=400&amp;&amp;scale=width
 2019-09-30 03:08:59,000 - ERROR - downloader - Response status code 404, file https://machinerysource.com/used/photos/bg_2578.jpg
 2019-09-30 03:09:00,471 - INFO - downloader - image #345	https://www.chevaliertw.com/img/pro/FTC-1320V.jpg
 2019-09-30 03:09:01,155 - INFO - downloader - image #346	https://crm.ferrotall.com/media/prod_pics_ferrotall/principal/1283/smtcl2-min.JPG
@@ -552,9 +679,9 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:09:09,620 - INFO - downloader - image #380	http://synergymachinesales.com/wp-content/uploads/2018/01/vmc-8030b.png
 2019-09-30 03:09:09,666 - INFO - feeder - thread feeder-001 exit
 2019-09-30 03:09:09,740 - INFO - downloader - image #381	https://live.staticflickr.com/3685/12820109755_a8646a36af_b.jpg
-2019-09-30 03:09:10,018 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;amp;ijn=4&amp;amp;start=400&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:09:10,018 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;ijn=4&amp;start=400&amp;tbs=&amp;tbm=isch
 2019-09-30 03:09:10,157 - INFO - downloader - image #382	https://im01.itaiwantrade.com/d08de441-af0e-4a7f-adff-371711f5e70c/MCV1100_preview(jpg)-480x480.jpg
-2019-09-30 03:09:10,405 - INFO - downloader - image #383	https://www.netbid.com/images/11606/X11606-6_2.jpg?w=569&amp;amp;h=427&amp;amp;404=default
+2019-09-30 03:09:10,405 - INFO - downloader - image #383	https://www.netbid.com/images/11606/X11606-6_2.jpg?w=569&amp;h=427&amp;404=default
 2019-09-30 03:09:10,665 - INFO - downloader - image #384	https://www.machinestation.us/wp-content/uploads/2017/11/Used-Haas-VF-4-Vertical-Machining-Center-MachineStation-USA-Main_LI.jpg
 2019-09-30 03:09:10,896 - INFO - downloader - image #385	https://www.fadal.com/images/2017/03/22/vmc-6030.png
 2019-09-30 03:09:11,002 - INFO - downloader - image #386	http://www.mfgnewsweb.com/archives/machinery_metalcutting_chipmaking/oct18/pics/Okuma-GENOS-M460-5AX.jpg
@@ -573,7 +700,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:09:14,246 - INFO - downloader - image #399	http://smsmachine.com/wp-content/uploads/2014/02/Hyundai_Wia_Vertical_Machining_Center.png
 2019-09-30 03:09:14,390 - INFO - downloader - image #400	https://s3images.coroflot.com/user_files/individual_files/large_368475_5KB4myH3VxPj07MGF3Bmx2SLH.jpg
 2019-09-30 03:09:14,712 - INFO - downloader - image #401	https://www.metalex.co.th/__novaimages/5688258?v=636995553091230000
-2019-09-30 03:09:14,820 - INFO - downloader - image #402	https://cdn2.hubspot.net/hub/2215571/hubfs/%283268%29%202000%20Kitamura%20Mycenter%203XI%20CNC%20Vertical%20Machining%20Center%20-%20Pic%201-1.png?width=265&amp;amp;height=265&amp;amp;name=%283268%29%202000%20Kitamura%20Mycenter%203XI%20CNC%20Vertical%20Machining%20Center%20-%20Pic%201-1.png
+2019-09-30 03:09:14,820 - INFO - downloader - image #402	https://cdn2.hubspot.net/hub/2215571/hubfs/%283268%29%202000%20Kitamura%20Mycenter%203XI%20CNC%20Vertical%20Machining%20Center%20-%20Pic%201-1.png?width=265&amp;height=265&amp;name=%283268%29%202000%20Kitamura%20Mycenter%203XI%20CNC%20Vertical%20Machining%20Center%20-%20Pic%201-1.png
 2019-09-30 03:09:14,964 - INFO - downloader - image #403	https://image.made-in-china.com/202f0j00sKzQptSIagUm/Fanuc-Control-Popular-Heavy-Duty-Linear-Guide-CNC-Milling-Machine-Factory-CNC-Vertical-Machining-Center-Machine-Tool-EV1165L-.jpg
 2019-09-30 03:09:15,136 - INFO - downloader - image #404	https://machinesused.s3.amazonaws.com/1/2019/5/medium/39529f634d5254ff8c13b0dbc66bd906
 2019-09-30 03:09:15,146 - INFO - downloader - image #405	https://www.machinesales.com/images/0001017495.jpg
@@ -597,7 +724,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:09:19,388 - INFO - downloader - image #423	https://www.taiwanexcellence.org/upload/product/old/105498JA-T043_L.jpg
 2019-09-30 03:09:19,520 - INFO - downloader - image #424	https://www.matsuura.co.jp/images/products/07v-plus/04VPlus-800.jpg
 2019-09-30 03:09:19,654 - INFO - downloader - image #425	https://s3.amazonaws.com/machine-hub-prod/machine-listing-images/tramar/12875-1556313201-563.jpg
-2019-09-30 03:09:19,744 - INFO - downloader - image #426	https://i1.wp.com/www.normanmachinetool.com/wp-content/uploads/2016/08/5488-TAKISAWA-MAC-V2E-MC-COMPO-CNC-VERTICAL-MACHINING-CENTER-1.jpg?fit=597%2C600&amp;amp;ssl=1
+2019-09-30 03:09:19,744 - INFO - downloader - image #426	https://i1.wp.com/www.normanmachinetool.com/wp-content/uploads/2016/08/5488-TAKISAWA-MAC-V2E-MC-COMPO-CNC-VERTICAL-MACHINING-CENTER-1.jpg?fit=597%2C600&amp;ssl=1
 2019-09-30 03:09:19,874 - INFO - downloader - image #427	https://i.ytimg.com/vi/bP158y03VxQ/maxresdefault.jpg
 2019-09-30 03:09:19,893 - INFO - downloader - image #428	https://i.ebayimg.com/images/g/qVEAAOSwaz9cwiF0/s-l300.jpg
 2019-09-30 03:09:20,234 - INFO - downloader - image #429	https://generalplatform.blob.core.windows.net/wwwarlingtonmachinerycom/product/images/large/2610/20190502_125613.jpg
@@ -637,7 +764,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:09:26,758 - INFO - downloader - image #463	https://www.ctemag.com/sites/www.ctemag.com/files/styles/product_image/public/product_images/250il.jpg?itok=z5HcuwX5
 2019-09-30 03:09:26,788 - INFO - downloader - image #464	http://www.akhurst.com/wp/wp-content/uploads/2018/01/Victor-VCenter-Vertical-Machining-Centers.png
 2019-09-30 03:09:27,088 - INFO - downloader - image #465	https://www.camexmachinery.com/media/com_eshop/products/resized/CV-7A1-700x600.jpg
-2019-09-30 03:09:27,458 - INFO - downloader - image #466	https://www.netbid.com/images/14607/V14607-41_5_slide.jpg?w=569&amp;amp;h=427&amp;amp;404=default
+2019-09-30 03:09:27,458 - INFO - downloader - image #466	https://www.netbid.com/images/14607/V14607-41_5_slide.jpg?w=569&amp;h=427&amp;404=default
 2019-09-30 03:09:27,638 - ERROR - downloader - Response status code 403, file https://static1.auctelia.com/en/resource/picture/leadwell-vertical-machining-center-430974L.jpg
 2019-09-30 03:09:27,650 - INFO - downloader - image #467	https://sc01.alicdn.com/kf/HTB1l5EQkMKTBuNkSne1q6yJoXXaJ/VMC-CNC-vertical-machining-center-taiwan-vertical.jpg_350x350.jpg
 2019-09-30 03:09:27,850 - INFO - downloader - image #468	https://machinerysource.com/wp-content/uploads/2019/07/YCM-NSV156AM-Vertical-Machining-Center-300x300.png
@@ -653,7 +780,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:09:29,401 - INFO - downloader - image #478	https://www.picclickimg.com/d/l400/pict/122746324205_/Mitsubishi-V360-Vertical-Machining-Center-10-HP-20X14X18.jpg
 2019-09-30 03:09:29,526 - INFO - downloader - image #479	https://i.machinio.com/medium/1f8uj9k/963182546.jpg
 2019-09-30 03:09:29,558 - INFO - downloader - image #480	http://smsmachine.com/wp-content/uploads/2014/02/Hyundai_Wia-Vertical-Machining-Centers-F700.png
-2019-09-30 03:09:29,596 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;amp;ijn=5&amp;amp;start=500&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:09:29,596 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;ijn=5&amp;start=500&amp;tbs=&amp;tbm=isch
 2019-09-30 03:09:29,845 - INFO - downloader - image #481	https://www.machinesales.com/images/0000527959.jpg
 2019-09-30 03:09:30,545 - INFO - downloader - image #482	https://cdn.makinate.com/used-kondia-a10-mbk-vertical-machining-center-m1902938333/photo/web/used-kondia-a10-mbk-vertical-machining-center-3.jpg
 2019-09-30 03:09:30,552 - INFO - downloader - image #483	https://industry.plantautomation-technology.com/suppliers/makino-asia-pte-ltd/products/iq300-iq500-vertical-machining-center-lg.jpg
@@ -755,12 +882,12 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:09:46,575 - INFO - downloader - image #578	http://www.gmvmacchine.com/dati/CatalogoOnLine/upload/img/dealer-vertical-machining-center-EIKON-VMC500-used---eikon%20vmc%20500-p.jpg
 2019-09-30 03:09:46,656 - INFO - downloader - image #579	https://www.okuma.co.jp/english/product/5avmc/images/mu-4000v/i_main_sp.jpg
 2019-09-30 03:09:46,682 - INFO - downloader - image #580	https://clarkmachinerysales.com/wp-content/uploads/2019/05/488816a.jpg
-2019-09-30 03:09:46,826 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;amp;ijn=6&amp;amp;start=600&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:09:46,826 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;ijn=6&amp;start=600&amp;tbs=&amp;tbm=isch
 2019-09-30 03:09:47,178 - INFO - downloader - image #581	https://advancedmachinery.com/wp-content/uploads/2019/04/Milltronics-VM30XP-50-taper-60x30-Used-CNC-Vertical-Machining-Center3.jpg
-2019-09-30 03:09:47,208 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;amp;ijn=7&amp;amp;start=700&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:09:47,208 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;ijn=7&amp;start=700&amp;tbs=&amp;tbm=isch
 2019-09-30 03:09:47,420 - INFO - downloader - image #582	https://www.interempresas.net/FotosArtProductos/P48330.jpg
-2019-09-30 03:09:47,564 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;amp;ijn=8&amp;amp;start=800&amp;amp;tbs=&amp;amp;tbm=isch
-2019-09-30 03:09:47,852 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;amp;ijn=9&amp;amp;start=900&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:09:47,564 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;ijn=8&amp;start=800&amp;tbs=&amp;tbm=isch
+2019-09-30 03:09:47,852 - INFO - parser - parsing result page https://www.google.com/search?q=Vertical+maching+center&amp;ijn=9&amp;start=900&amp;tbs=&amp;tbm=isch
 2019-09-30 03:09:49,599 - INFO - downloader - image #583	https://www.ecotechmachinery.com/images/zoo/milling/vertical/Aurora-Seiki-Vertical-Machining-Center_0321.JPG
 2019-09-30 03:09:49,854 - INFO - parser - no more page urls for thread parser-001 to parse
 2019-09-30 03:09:49,856 - INFO - parser - thread parser-001 exit
@@ -774,48 +901,48 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:11:11,246 - INFO - downloader - no more download task for thread downloader-002
 2019-09-30 03:11:11,247 - INFO - downloader - thread downloader-002 exit
 2019-09-30 03:11:11,574 - INFO - icrawler.crawler - Crawling task done!
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#hide_output&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;keyword&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;CNC lathe&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;mkdir CNC
-&lt;span class=&quot;n&quot;&gt;VMCvsCNC&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;./content/CNC&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;search_filters_google&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#hide_output</span>
+<span class="n">keyword</span> <span class="o">=</span> <span class="s1">&#39;CNC lathe&#39;</span>
+<span class="o">!</span>mkdir CNC
+<span class="n">VMCvsCNC</span> <span class="o">=</span><span class="s1">&#39;./content/CNC&#39;</span>
+<span class="n">search_filters_google</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
-&lt;span class=&quot;n&quot;&gt;google_crawler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GoogleImageCrawler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;downloader_threads&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;storage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;root_dir&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VMCvsCNC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log_level&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logging&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INFO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;google_crawler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;crawl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keyword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keyword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;search_filters_google&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max_num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<span class="n">google_crawler</span> <span class="o">=</span> <span class="n">GoogleImageCrawler</span><span class="p">(</span><span class="n">downloader_threads</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">storage</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;root_dir&#39;</span><span class="p">:</span> <span class="n">VMCvsCNC</span><span class="p">},</span><span class="n">log_level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">google_crawler</span><span class="o">.</span><span class="n">crawl</span><span class="p">(</span><span class="n">keyword</span><span class="o">=</span><span class="n">keyword</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="n">search_filters_google</span><span class="p">,</span> <span class="n">max_num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stderr output_text&quot;&gt;
-&lt;pre&gt;2019-09-30 03:11:14,003 - INFO - icrawler.crawler - start crawling...
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2019-09-30 03:11:14,003 - INFO - icrawler.crawler - start crawling...
 2019-09-30 03:11:14,004 - INFO - icrawler.crawler - starting 1 feeder threads...
 2019-09-30 03:11:14,006 - INFO - icrawler.crawler - starting 1 parser threads...
 2019-09-30 03:11:14,015 - INFO - icrawler.crawler - starting 4 downloader threads...
-2019-09-30 03:11:14,549 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;amp;ijn=0&amp;amp;start=0&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:11:14,549 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;ijn=0&amp;start=0&amp;tbs=&amp;tbm=isch
 2019-09-30 03:11:14,777 - INFO - downloader - image #1	https://www.normanmachinetool.com/wp-content/uploads/2018/08/7966-CLAUSING-COLCHESTER-CNC200-STORM-2-AXIS-CNC-LATHE-1.jpg
 2019-09-30 03:11:14,959 - INFO - downloader - image #2	https://34h49vqklr1l2ajs1xqmjgzq-wpengine.netdna-ssl.com/wp-content/uploads/2018/07/1440-cnc-lathe-600x527.png
 2019-09-30 03:11:14,975 - INFO - downloader - image #3	https://image.made-in-china.com/2f0j00DjMavLPtsBgR/Precision-China-CNC-Lathe-Machine-Price-CK6152E-.jpg
@@ -906,7 +1033,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:11:36,717 - INFO - downloader - image #87	https://www.afawcettprecision.co.uk/wp-content/uploads/XYZ-RLS-425-CNC-Lathe.jpg
 2019-09-30 03:11:37,301 - INFO - downloader - image #88	https://www.wadeodesign.com/uploads/6/1/3/8/61384849/lathe-overall-1_orig.jpg
 2019-09-30 03:11:37,505 - INFO - downloader - image #89	https://i.udemycdn.com/course/240x135/1672148_4bee.jpg
-2019-09-30 03:11:37,615 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;amp;ijn=1&amp;amp;start=100&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:11:37,615 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;ijn=1&amp;start=100&amp;tbs=&amp;tbm=isch
 2019-09-30 03:11:37,812 - INFO - downloader - image #90	https://previews.123rf.com/images/phuchit/phuchit1707/phuchit170700077/82824222-cnc-lathe-machine-turning-machine-cutting-the-metal-screw-thread-part-hi-precision-cnc-machining-con.jpg
 2019-09-30 03:11:37,947 - INFO - downloader - image #91	https://www.robotshop.com/media/catalog/product/cache/image/380x380/9df78eab33525d08d6e5fb8d27136e95/s/h/sherline-4000-series-cnc-lathe-complete-in_1.jpg
 2019-09-30 03:11:38,287 - INFO - downloader - image #92	http://www.colchester-cnc.com/wp-content/uploads/2018/01/The-Difference-between-CNC-and-Manual-Lathe-Machines.jpg
@@ -1009,7 +1136,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:11:53,643 - INFO - downloader - image #188	https://libertymachinery.com/wp-content/uploads/2017/08/Okuma-400x300.jpg
 2019-09-30 03:11:53,681 - INFO - downloader - image #189	https://mk0cnccookbookgxcner.kinstacdn.com/wp-content/uploads/2017/11/img_5a10b6768fc3b-270x192.png
 2019-09-30 03:11:53,769 - INFO - downloader - image #190	https://5.imimg.com/data5/VP/OU/MY-4882395/cnc-lathe-machine-250x250.png
-2019-09-30 03:11:53,880 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;amp;ijn=2&amp;amp;start=200&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:11:53,880 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;ijn=2&amp;start=200&amp;tbs=&amp;tbm=isch
 2019-09-30 03:11:53,937 - INFO - downloader - image #191	http://www.cnctrainingcentre.com/wp-content/uploads/2018/03/Feeler-HT-30-MC.jpg
 2019-09-30 03:11:54,134 - INFO - downloader - image #192	https://cdn.ready-market.com/101/f6cdccdf//Templates/pic/IMG-New-Auto-Loading-CNC-Lathe-A-6+.jpg?v=d1402c1d
 2019-09-30 03:11:54,141 - INFO - downloader - image #193	https://www.axestatus.com/images/uploads/products/tuscan-savana-cnc-lathes-small.png
@@ -1022,7 +1149,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:11:55,528 - INFO - downloader - image #200	http://admin.kdcapital.com/Images/StoreImages/13/170289_7.jpg
 2019-09-30 03:11:55,678 - INFO - downloader - image #201	https://www.sompornmould.com/uploads/1/2/4/6/124616547/goodway-row-on-web_1_orig.png
 2019-09-30 03:11:55,699 - INFO - downloader - image #202	https://resellcnc.s3.amazonaws.com/01t-product2/08097/acra_fel-1440_1_v1.jpg
-2019-09-30 03:11:55,966 - INFO - downloader - image #203	https://blog.machinetoolbids.com/hs-fs/hubfs/thislathepic.jpg?width=320&amp;amp;name=thislathepic.jpg
+2019-09-30 03:11:55,966 - INFO - downloader - image #203	https://blog.machinetoolbids.com/hs-fs/hubfs/thislathepic.jpg?width=320&amp;name=thislathepic.jpg
 2019-09-30 03:11:56,124 - INFO - downloader - image #204	https://www.heavyhaulers.com/images/cnc-lathes/optimum-th3309d-metal-lathe.png
 2019-09-30 03:11:56,384 - INFO - downloader - image #205	https://media.exapro.com/product/2019/08/P90812014/9d3de2545d8a60171a57adb1d818ed8b/300x221/haas-tl-25he-p90812014_2.JPG
 2019-09-30 03:11:56,498 - INFO - downloader - image #206	https://i.ebayimg.com/images/g/bKwAAOSwfbpbjJJg/s-l800.jpg
@@ -1037,7 +1164,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:11:57,469 - INFO - downloader - image #215	https://www.axestatus.com/images/uploads/products/TUSCAN-LS-1000X1400-A.jpg
 2019-09-30 03:11:57,697 - INFO - downloader - image #216	https://www.cmz.com/media/uploads/productos/subcategorias/tornos-cnc-lathe-serie-td-z800.jpg
 2019-09-30 03:11:57,780 - INFO - downloader - image #217	https://www.haascnc.com/content/dam/haascnc/machines/lathes/toolroom/models/tl-2/gallery/haastl2-rangle%20copy.jpg
-2019-09-30 03:11:57,947 - INFO - downloader - image #218	https://i1.wp.com/www.stylecncmachines.com/wp-content/uploads/2016/07/170728-STYLE-510-PRODUCT-652-x-459.jpg?fit=652%2C459&amp;amp;ssl=1
+2019-09-30 03:11:57,947 - INFO - downloader - image #218	https://i1.wp.com/www.stylecncmachines.com/wp-content/uploads/2016/07/170728-STYLE-510-PRODUCT-652-x-459.jpg?fit=652%2C459&amp;ssl=1
 2019-09-30 03:11:58,044 - INFO - downloader - image #219	http://www.yampaprecision.com/wp-content/uploads/2017/12/nakamuro-tome-machine.jpg
 2019-09-30 03:11:58,126 - INFO - downloader - image #220	https://img01.techsoft.co.uk/o/ts/MillingRoutingImages/CNCLathe_Swipe.jpg
 2019-09-30 03:11:58,258 - INFO - downloader - image #221	https://libertymachinery.com/wp-content/uploads/2017/09/43770-400x300.jpg
@@ -1049,7 +1176,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:12:00,230 - INFO - downloader - image #227	https://st4.depositphotos.com/8299360/21259/v/600/depositphotos_212592304-stock-video-cnc-lathe-machine-turning-machine.jpg
 2019-09-30 03:12:00,232 - INFO - downloader - image #228	http://www.hilalotomat.com.tr/en/images/djmediatools/32-goodway-gls-150-cnc-torna/goodway_gls_150_cnc_torna.jpg
 2019-09-30 03:12:01,162 - INFO - downloader - image #229	http://www.hmtmachinetools.com/images_web/CNC_Lathe_ECONO_CNC_26.jpg
-2019-09-30 03:12:01,275 - INFO - downloader - image #230	https://www.lowrancemachine.com/image.JPG?Action=thumbnail&amp;amp;algorithm=fill_proportional&amp;amp;width=339
+2019-09-30 03:12:01,275 - INFO - downloader - image #230	https://www.lowrancemachine.com/image.JPG?Action=thumbnail&amp;algorithm=fill_proportional&amp;width=339
 2019-09-30 03:12:01,450 - INFO - downloader - image #231	http://www.kfrcast.com/files/PP_1.jpg
 2019-09-30 03:12:01,567 - INFO - downloader - image #232	http://image.polygim.com.tw/thumb/image-cHJvZHVjdA==--product1452740506872695.jpg
 2019-09-30 03:12:01,720 - INFO - downloader - image #233	https://34h49vqklr1l2ajs1xqmjgzq-wpengine.netdna-ssl.com/wp-content/uploads/2015/06/benchtop-cnc-lathe1-600x200_c.png
@@ -1067,7 +1194,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:12:04,322 - INFO - downloader - image #245	https://cdn.ready-market.com/101/f6cdccdf//Templates/pic/LB300MY_OKUMA_cnc_lathe.jpg?v=65a2308a
 2019-09-30 03:12:04,514 - INFO - downloader - image #246	https://i.pinimg.com/originals/4e/b7/17/4eb7177491ea468169d102e845f6797a.jpg
 2019-09-30 03:12:04,703 - INFO - downloader - image #247	http://www.milltronics.com/wp-content/uploads/2015/10/SL61-e1491859631700.png
-2019-09-30 03:12:04,862 - ERROR - downloader - Exception caught when downloading file https://previews.123rf.com/images/phuchit/phuchit1708/phuchit170800110/84877959-the-multi-function-cnc-lathe-machine-cutting-the-steel-shaft-hi-technology-cnc-manufacturing-concept.jpg, error: HTTPSConnectionPool(host=&amp;#39;previews.123rf.com&amp;#39;, port=443): Read timed out. (read timeout=5), remaining retry times: 2
+2019-09-30 03:12:04,862 - ERROR - downloader - Exception caught when downloading file https://previews.123rf.com/images/phuchit/phuchit1708/phuchit170800110/84877959-the-multi-function-cnc-lathe-machine-cutting-the-steel-shaft-hi-technology-cnc-manufacturing-concept.jpg, error: HTTPSConnectionPool(host=&#39;previews.123rf.com&#39;, port=443): Read timed out. (read timeout=5), remaining retry times: 2
 2019-09-30 03:12:04,977 - INFO - downloader - image #248	https://www.cnc-lathe.com/proimages/pb/cnc-lathe/JYN/JYN-b.jpg
 2019-09-30 03:12:05,023 - INFO - downloader - image #249	http://www.apiint.com/wp-content/uploads/2016/04/DOOSAN-P480-CNC-LATHE.jpg
 2019-09-30 03:12:05,917 - INFO - downloader - image #250	https://dentool.dk/wp-content/uploads/2019/06/Mazak-SQT-200-M-CNC-Lathe---3409.JPG
@@ -1076,7 +1203,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:12:06,494 - INFO - downloader - image #253	https://anltup4an.cloudimg.io/crop/300x210/x/https://kitmondo-images.s3.amazonaws.com/SiteImages/Images/Listing/2019/8/IMG_1317_ETSwrrn.JPG
 2019-09-30 03:12:06,925 - INFO - downloader - image #254	https://cdn.makinate.com/used-hwacheon-hi-tech-400-cnc-lathe-with-fixed-tools-m1903370820/photo/web/used-hwacheon-hi-tech-400-cnc-lathe-with-fixed-tools-3.jpg
 2019-09-30 03:12:07,271 - INFO - downloader - image #255	https://www.machinedeal.com/userfiles/product/738842/738842_0_large.jpg
-2019-09-30 03:12:07,493 - INFO - downloader - image #256	https://content.jdmagicbox.com/comp/vijayawada/s2/0866px866.x866.160729153402.a4s2/catalogue/3d-macinfotech-pvt-ltd-vijayawada-ho-vijayawada-cnc-lathe-machine-job-works-r2hcbt.jpg?fit=around%7C270%3A130&amp;amp;crop=270%3A130%3B%2A%2C%2A
+2019-09-30 03:12:07,493 - INFO - downloader - image #256	https://content.jdmagicbox.com/comp/vijayawada/s2/0866px866.x866.160729153402.a4s2/catalogue/3d-macinfotech-pvt-ltd-vijayawada-ho-vijayawada-cnc-lathe-machine-job-works-r2hcbt.jpg?fit=around%7C270%3A130&amp;crop=270%3A130%3B%2A%2C%2A
 2019-09-30 03:12:07,501 - INFO - downloader - image #257	https://www.fastcutt.com/images/GF42.jpg
 2019-09-30 03:12:07,540 - INFO - downloader - image #258	http://www.sbmachinetools.com/images/products/dainichi.jpg
 2019-09-30 03:12:07,753 - INFO - downloader - image #259	https://s3.amazonaws.com/machine-hub-prod/machine-listing-images/fp-miller-2/4645-1562346153-380.jpg
@@ -1094,7 +1221,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:12:09,565 - INFO - downloader - image #270	http://hackaday.com/wp-content/uploads/2014/06/712cnc-lathe-main.jpg?w=580
 2019-09-30 03:12:09,588 - INFO - downloader - image #271	https://www.jamestownmachinery.com/wp-content/uploads/2019/04/Haas_ST-10_11_STA1904_front.jpg
 2019-09-30 03:12:09,674 - INFO - downloader - image #272	https://ha8rg74u6u-flywheel.netdna-ssl.com/wp-content/uploads/2019/05/Kent-CNC-Horizontal-Turning-Centers.jpg
-2019-09-30 03:12:09,925 - ERROR - downloader - Exception caught when downloading file https://previews.123rf.com/images/phuchit/phuchit1708/phuchit170800110/84877959-the-multi-function-cnc-lathe-machine-cutting-the-steel-shaft-hi-technology-cnc-manufacturing-concept.jpg, error: HTTPSConnectionPool(host=&amp;#39;previews.123rf.com&amp;#39;, port=443): Read timed out. (read timeout=5), remaining retry times: 1
+2019-09-30 03:12:09,925 - ERROR - downloader - Exception caught when downloading file https://previews.123rf.com/images/phuchit/phuchit1708/phuchit170800110/84877959-the-multi-function-cnc-lathe-machine-cutting-the-steel-shaft-hi-technology-cnc-manufacturing-concept.jpg, error: HTTPSConnectionPool(host=&#39;previews.123rf.com&#39;, port=443): Read timed out. (read timeout=5), remaining retry times: 1
 2019-09-30 03:12:10,128 - INFO - downloader - image #273	https://www.machinestation.us/wp-content/uploads/2017/06/Femco-WNCL-20-60-CNC-Lathe-Main.jpg
 2019-09-30 03:12:10,265 - INFO - downloader - image #274	https://www.emco-world.com/fileadmin/user_upload/_Group/images/BANNER_HOME/Startseite_neu_Produkte/Banner_S45-1.png
 2019-09-30 03:12:10,713 - INFO - downloader - image #275	http://www.gdweiler.com/image/cache/catalog/gedee2-1140x380.jpg
@@ -1109,11 +1236,11 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:12:12,219 - INFO - downloader - image #284	https://www.lencoholdings.com/wp-content/uploads/5-min.jpg
 2019-09-30 03:12:13,310 - INFO - downloader - image #285	https://img.twa.nl/13119693
 2019-09-30 03:12:13,666 - INFO - downloader - image #286	https://www.takisawa.co.jp/img/product/cnc-tcc.jpg
-2019-09-30 03:12:14,085 - INFO - downloader - image #287	https://media.machines4u.com.au/machinery/90/533690/33141921.jpg?t=1&amp;amp;w=301&amp;amp;h=206
+2019-09-30 03:12:14,085 - INFO - downloader - image #287	https://media.machines4u.com.au/machinery/90/533690/33141921.jpg?t=1&amp;w=301&amp;h=206
 2019-09-30 03:12:14,311 - INFO - downloader - image #288	https://res.surplex.com/images/c_fill,d_no_image.png,f_auto,fl_progressive,h_346,q_auto,w_536/i_03772925/MONFORTS_RNC_5_CNC_Lathe.jpg
 2019-09-30 03:12:14,607 - INFO - downloader - image #289	https://budsmachinetools.com/wp-content/uploads/2016/07/New-CNC-Lathes-Blog.jpg
-2019-09-30 03:12:14,791 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;amp;ijn=3&amp;amp;start=300&amp;amp;tbs=&amp;amp;tbm=isch
-2019-09-30 03:12:14,985 - ERROR - downloader - Exception caught when downloading file https://previews.123rf.com/images/phuchit/phuchit1708/phuchit170800110/84877959-the-multi-function-cnc-lathe-machine-cutting-the-steel-shaft-hi-technology-cnc-manufacturing-concept.jpg, error: HTTPSConnectionPool(host=&amp;#39;previews.123rf.com&amp;#39;, port=443): Read timed out. (read timeout=5), remaining retry times: 0
+2019-09-30 03:12:14,791 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;ijn=3&amp;start=300&amp;tbs=&amp;tbm=isch
+2019-09-30 03:12:14,985 - ERROR - downloader - Exception caught when downloading file https://previews.123rf.com/images/phuchit/phuchit1708/phuchit170800110/84877959-the-multi-function-cnc-lathe-machine-cutting-the-steel-shaft-hi-technology-cnc-manufacturing-concept.jpg, error: HTTPSConnectionPool(host=&#39;previews.123rf.com&#39;, port=443): Read timed out. (read timeout=5), remaining retry times: 0
 2019-09-30 03:12:15,625 - INFO - downloader - image #290	https://images.jdmagicbox.com/comp/chennai/h9/044pxx44.xx44.180626151246.a6h9/catalogue/anusuya-enterprises-padi-chennai-cnc-lathe-machine-dealers-un3il8pcvr.jpg
 2019-09-30 03:12:15,718 - INFO - downloader - image #291	https://static.spacecrafted.com/cf2802ec0ae24e43a9fccf504751b847/i/a42a158490d64b239d98a46a39f4c0d5/1/4SoifmQp45JMgBnHm9g4L/3280-10picnewguarding_000.JPG
 2019-09-30 03:12:15,801 - INFO - downloader - image #292	http://image.polygim.com.tw/thumb/image-cHJvZHVjdA==--product1451892982660687.jpg
@@ -1214,7 +1341,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:12:31,403 - INFO - downloader - image #386	https://hhtechproducts.com/wp-content/uploads/Roland-Milling-Machines.jpg
 2019-09-30 03:12:31,619 - INFO - downloader - image #387	https://bjcmachinetoolrepairs.com.au/wp-content/uploads/2018/05/Used-CNC-Lathe-Haas-TL3B-2009-1.jpg
 2019-09-30 03:12:31,866 - INFO - downloader - image #388	http://www.metramh.com/img/ShowRoom3.jpg
-2019-09-30 03:12:31,912 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;amp;ijn=4&amp;amp;start=400&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:12:31,912 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;ijn=4&amp;start=400&amp;tbs=&amp;tbm=isch
 2019-09-30 03:12:32,014 - INFO - downloader - image #389	https://www.sterlingmachinery.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/A/3/A3124_1.jpg
 2019-09-30 03:12:32,209 - INFO - downloader - image #390	https://asimachinetool.com/wp-content/uploads/2018/02/Cin5044pic2-300x300.jpg
 2019-09-30 03:12:32,334 - INFO - downloader - image #391	http://www.machiningnews.com/wp-content/uploads/2017/12/Hyundai_KL7000LY_post2-700x457.jpg
@@ -1266,7 +1393,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:12:39,967 - INFO - downloader - image #437	http://zecttron.com/v3/images/CNC%20Lathe%20UML-V2.jpg
 2019-09-30 03:12:39,996 - INFO - downloader - image #438	https://i.pinimg.com/originals/89/dc/8a/89dc8a9ab38be9c4ec583dbbe5e629bb.jpg
 2019-09-30 03:12:40,813 - INFO - downloader - image #439	http://www.tw-charles.com/images/CNC-Lathe-Machine/CNC-Lathe-Machine_JG-100.jpg
-2019-09-30 03:12:40,919 - INFO - downloader - image #440	https://content1.jdmagicbox.com/comp/rajkot/t4/0281px281.x281.190312194123.w7t4/catalogue/shakti-industrial-corporation-150-feet-ring-road-rajkot-cnc-lathe-machine-dealers-io6wtcb2un.jpg?interpolation=lanczos-none&amp;amp;output-format=jpg&amp;amp;resize=1024:370&amp;amp;crop=1024:370px;*,*
+2019-09-30 03:12:40,919 - INFO - downloader - image #440	https://content1.jdmagicbox.com/comp/rajkot/t4/0281px281.x281.190312194123.w7t4/catalogue/shakti-industrial-corporation-150-feet-ring-road-rajkot-cnc-lathe-machine-dealers-io6wtcb2un.jpg?interpolation=lanczos-none&amp;output-format=jpg&amp;resize=1024:370&amp;crop=1024:370px;*,*
 2019-09-30 03:12:41,068 - INFO - downloader - image #441	https://static.wixstatic.com/media/88d170_bdbe93f8ef7643a1bd1eba0bb3522304~mv2.jpg/v1/fill/w_548,h_306,al_c,q_80,usm_0.66_1.00_0.01/88d170_bdbe93f8ef7643a1bd1eba0bb3522304~mv2.webp
 2019-09-30 03:12:41,286 - INFO - downloader - image #442	https://image.slidesharecdn.com/terminologyandconsiderationsofcnclathemachines-151109063851-lva1-app6892/95/terminology-and-considerations-of-cnc-lathe-machines-1-638.jpg?cb=1447051154
 2019-09-30 03:12:41,398 - INFO - downloader - image #443	https://c8.alamy.com/comp/R18768/industrial-metalworking-cutting-process-by-cnc-lathe-machine-3d-rendering-R18768.jpg
@@ -1291,7 +1418,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:12:44,209 - INFO - downloader - image #462	https://cncdirt.com/wp-content/uploads/2017/01/CNC-Lathe-Taper.png
 2019-09-30 03:12:44,300 - INFO - downloader - image #463	http://reinenmachine.com/wp-content/uploads/2011/12/OLC-Series-Image.jpg
 2019-09-30 03:12:44,768 - INFO - downloader - image #464	https://junkmailimages.blob.core.windows.net/thumb/6652f304805342da8dda49d9551641ce.jpg
-2019-09-30 03:12:45,037 - ERROR - downloader - Exception caught when downloading file https://previews.123rf.com/images/phuchit/phuchit1706/phuchit170600094/80084110-the-cnc-lathe-machine-or-turning-machine-drilling-the-metal-rod-with-the-drill-tool-and-center-drill.jpg, error: HTTPSConnectionPool(host=&amp;#39;previews.123rf.com&amp;#39;, port=443): Read timed out. (read timeout=5), remaining retry times: 2
+2019-09-30 03:12:45,037 - ERROR - downloader - Exception caught when downloading file https://previews.123rf.com/images/phuchit/phuchit1706/phuchit170600094/80084110-the-cnc-lathe-machine-or-turning-machine-drilling-the-metal-rod-with-the-drill-tool-and-center-drill.jpg, error: HTTPSConnectionPool(host=&#39;previews.123rf.com&#39;, port=443): Read timed out. (read timeout=5), remaining retry times: 2
 2019-09-30 03:12:45,223 - INFO - downloader - image #465	https://www.demachining.com/wp-content/uploads/2017/10/CNC-Lathe-Daewoo-Puma-300.jpg
 2019-09-30 03:12:45,312 - INFO - downloader - image #466	https://i.udemycdn.com/course/240x135/1451662_2204_4.jpg
 2019-09-30 03:12:45,428 - INFO - downloader - image #467	https://automatecnc.com/sites/default/files/gang%20tool%20lathes_0.JPG
@@ -1309,10 +1436,10 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:12:46,833 - INFO - downloader - image #479	https://www.machinestation.us/wp-content/uploads/2017/06/Mori-Seiki-Cl-25-CNC-Lathe-USA.jpg
 2019-09-30 03:12:47,225 - INFO - downloader - image #480	https://cdn.simplesite.com/i/03/4e/283163834308513283/i283163839617505746.jpg
 2019-09-30 03:12:47,278 - INFO - downloader - image #481	https://cdn.makinate.com/used-avm-angelini-snupy-cnc-lathe-with-live-tooling-m1903295084/photo/web/used-avm-angelini-snupy-cnc-lathe-with-live-tooling-3.jpg
-2019-09-30 03:12:47,381 - INFO - downloader - image #482	https://img.twa.nl/11746035?width=600&amp;amp;height=450&amp;amp;watermark=none
+2019-09-30 03:12:47,381 - INFO - downloader - image #482	https://img.twa.nl/11746035?width=600&amp;height=450&amp;watermark=none
 2019-09-30 03:12:47,525 - INFO - downloader - image #483	https://www.tormach.com/blog/wp-content/uploads/ngg_featured/34926_Tailstock_with_34105_Live_Center_IMG_9965.jpg
 2019-09-30 03:12:48,238 - INFO - downloader - image #484	https://www.wardcnc.com/wp-content/uploads/2018/10/Hankook-Protec-11N-Series.png
-2019-09-30 03:12:48,248 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;amp;ijn=5&amp;amp;start=500&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:12:48,248 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;ijn=5&amp;start=500&amp;tbs=&amp;tbm=isch
 2019-09-30 03:12:48,503 - INFO - downloader - image #485	https://www.cnc-lathe.com/proimages/sr/%E6%A9%9F%E6%A2%B0%E6%89%8B%E5%8E%BB%E8%83%8C-3.jpg
 2019-09-30 03:12:48,536 - INFO - downloader - image #486	https://user-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_1440,w_720,f_auto,q_auto/1574389/%E6%9C%AA%E6%A0%87%E9%A2%98-1_wvjdxr.jpg
 2019-09-30 03:12:48,686 - INFO - downloader - image #487	https://www.bochi-us.com/wp-content/uploads/elementor/thumbs/Sk40s-50s-CNC-Lathe-nsoyh91aubad0d6we016vzh9upov0u8yhgdz2qg4wi.jpg
@@ -1324,7 +1451,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:12:50,014 - INFO - downloader - image #493	http://www.epmach.com/images/doosan-lynx-220l-495x354.jpg
 2019-09-30 03:12:50,184 - INFO - downloader - image #494	https://www.lencoholdings.com/wp-content/uploads/4-min.jpg
 2019-09-30 03:12:50,211 - INFO - downloader - image #495	https://www.ctemag.com/sites/www.ctemag.com/files/article_images/cnc-chef-4.jpg
-2019-09-30 03:12:50,220 - ERROR - downloader - Exception caught when downloading file https://previews.123rf.com/images/phuchit/phuchit1706/phuchit170600094/80084110-the-cnc-lathe-machine-or-turning-machine-drilling-the-metal-rod-with-the-drill-tool-and-center-drill.jpg, error: HTTPSConnectionPool(host=&amp;#39;previews.123rf.com&amp;#39;, port=443): Read timed out. (read timeout=5), remaining retry times: 1
+2019-09-30 03:12:50,220 - ERROR - downloader - Exception caught when downloading file https://previews.123rf.com/images/phuchit/phuchit1706/phuchit170600094/80084110-the-cnc-lathe-machine-or-turning-machine-drilling-the-metal-rod-with-the-drill-tool-and-center-drill.jpg, error: HTTPSConnectionPool(host=&#39;previews.123rf.com&#39;, port=443): Read timed out. (read timeout=5), remaining retry times: 1
 2019-09-30 03:12:50,340 - INFO - downloader - image #496	https://www.hardinge.com/wp-content/uploads/H51_Angle_RIGHT_Mits%20Control-300x278.jpg
 2019-09-30 03:12:50,415 - INFO - downloader - image #497	https://cpimg.tistatic.com/04347539/b/4/CNC-lathe-Daewoo-Puma-12L.jpg
 2019-09-30 03:12:50,670 - INFO - downloader - image #498	https://tech-labs.com/sites/default/files/product_images/turn_270_pro.png
@@ -1354,9 +1481,9 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:12:55,029 - INFO - downloader - image #522	http://www.watsongrinding.com/wp-content/uploads/2012/03/Vertical-CNC-Lathe.jpg
 2019-09-30 03:12:55,120 - INFO - downloader - image #523	https://www.rk-int.com/wp-content/uploads/thememakers/cardealer/4/1519/main/58822595d508e.png
 2019-09-30 03:12:55,237 - INFO - downloader - image #524	https://3.imimg.com/data3/ES/SJ/MY-1259588/cnc-lathe-trainer-500x500.jpg
-2019-09-30 03:12:55,280 - ERROR - downloader - Exception caught when downloading file https://previews.123rf.com/images/phuchit/phuchit1706/phuchit170600094/80084110-the-cnc-lathe-machine-or-turning-machine-drilling-the-metal-rod-with-the-drill-tool-and-center-drill.jpg, error: HTTPSConnectionPool(host=&amp;#39;previews.123rf.com&amp;#39;, port=443): Read timed out. (read timeout=5), remaining retry times: 0
+2019-09-30 03:12:55,280 - ERROR - downloader - Exception caught when downloading file https://previews.123rf.com/images/phuchit/phuchit1706/phuchit170600094/80084110-the-cnc-lathe-machine-or-turning-machine-drilling-the-metal-rod-with-the-drill-tool-and-center-drill.jpg, error: HTTPSConnectionPool(host=&#39;previews.123rf.com&#39;, port=443): Read timed out. (read timeout=5), remaining retry times: 0
 2019-09-30 03:12:55,440 - INFO - downloader - image #525	https://4.imimg.com/data4/WU/JN/MY-9402396/simple-turn-40100-500x500.jpg
-2019-09-30 03:12:55,719 - INFO - downloader - image #526	https://cdn.instructables.com/FU5/00KC/ILQTEHLF/FU500KCILQTEHLF.LARGE.jpg?auto=webp&amp;amp;width=1024&amp;amp;height=1024&amp;amp;fit=bounds
+2019-09-30 03:12:55,719 - INFO - downloader - image #526	https://cdn.instructables.com/FU5/00KC/ILQTEHLF/FU500KCILQTEHLF.LARGE.jpg?auto=webp&amp;width=1024&amp;height=1024&amp;fit=bounds
 2019-09-30 03:12:55,968 - INFO - downloader - image #527	https://media.machines4u.com.au/machinery/8/404808/Y-axis-CNC-lathes-up-to-3000mm-and-160mm-bore_19263430.l.jpg
 2019-09-30 03:12:56,111 - INFO - downloader - image #528	https://upload.wikimedia.org/wikipedia/commons/6/69/Cnc_lathe.png
 2019-09-30 03:12:56,485 - INFO - downloader - image #529	https://www.jinnfa.com/image/new/banner4_1200.jpg
@@ -1374,7 +1501,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:12:58,429 - INFO - downloader - image #541	https://i2.wp.com/quakemfg.com/wp-content/uploads/2016/09/wasino-cnc-lathe.jpg?fit=400%2C400
 2019-09-30 03:12:58,609 - INFO - downloader - image #542	https://www.technologysupplies.co.uk/media/catalog/product/cache/1/image/385x450/9df78eab33525d08d6e5fb8d27136e95/i/m/image_78982.jpg
 2019-09-30 03:12:58,833 - INFO - downloader - image #543	https://www.clausing-industrial.com/images/CL/CCNCCLMR-model.jpg
-2019-09-30 03:12:58,917 - INFO - downloader - image #544	https://www.netbid.com/images/13959/X13947-2_1_slide.jpg?w=569&amp;amp;h=427&amp;amp;404=default
+2019-09-30 03:12:58,917 - INFO - downloader - image #544	https://www.netbid.com/images/13959/X13947-2_1_slide.jpg?w=569&amp;h=427&amp;404=default
 2019-09-30 03:12:58,985 - INFO - downloader - image #545	https://sunlabtech.com/wp-content/uploads/2018/08/CNC-Lathe-Machine.jpg
 2019-09-30 03:12:59,126 - INFO - downloader - image #546	https://res.surplex.com/images/c_fill,d_no_image.png,f_auto,fl_progressive,h_220,q_auto,w_220/i_03810773/WEISSER_Univertor_AS_400_L_CNC_CNC_Lathe.jpg
 2019-09-30 03:12:59,206 - INFO - downloader - image #547	https://www.cnc-lathe.com/proimages/sr/HC-30%E7%99%BD%E5%BA%95.jpg
@@ -1416,10 +1543,10 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:13:06,616 - INFO - downloader - image #583	http://smsmachine.com/wp-content/uploads/2014/02/Beefy-casting-of-the-L280-Series-of-CNC-Turning-Centers.png
 2019-09-30 03:13:06,665 - INFO - downloader - image #584	https://resellcnc.s3.amazonaws.com/01t-product2/08168/romi_c_420_1_v1.jpg
 2019-09-30 03:13:06,968 - INFO - downloader - image #585	https://i.machinio.com/medium/5dnrpw/945.jpg
-2019-09-30 03:13:07,083 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;amp;ijn=6&amp;amp;start=600&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:13:07,083 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;ijn=6&amp;start=600&amp;tbs=&amp;tbm=isch
 2019-09-30 03:13:07,125 - INFO - downloader - image #586	https://image.shutterstock.com/image-photo/cnc-lathe-machine-turning-drilling-260nw-756671887.jpg
 2019-09-30 03:13:07,145 - INFO - downloader - image #587	http://www.hope-fellows.com/wp-content/uploads/2017/09/cnc_lathe.jpg
-2019-09-30 03:13:07,824 - INFO - downloader - image #588	https://www.netbid.com/images/13959/X13947-2_4_slide.jpg?w=569&amp;amp;h=427&amp;amp;404=default
+2019-09-30 03:13:07,824 - INFO - downloader - image #588	https://www.netbid.com/images/13959/X13947-2_4_slide.jpg?w=569&amp;h=427&amp;404=default
 2019-09-30 03:13:07,912 - INFO - downloader - image #589	https://thumbs.dreamstime.com/z/cnc-lathe-machine-turning-machine-cutting-thread-aluminium-shaft-part-modern-manufacturing-process-cnc-lathe-116586304.jpg
 2019-09-30 03:13:08,107 - ERROR - downloader - Response status code 404, file https://www.hurco.com/en-us/cnc-machine-tools/our-control/winmax-lathe-control/PublishingImages/Lathe-Advanced-Control-Technology.jpg
 2019-09-30 03:13:08,201 - INFO - downloader - image #590	https://cdn.makinate.com/used-daewoo-puma-240-mb-cnc-lathe-with-live-tooling-m1903346334/photo/web/used-daewoo-puma-240-mb-cnc-lathe-with-live-tooling-7.jpg
@@ -1438,7 +1565,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:13:10,444 - INFO - downloader - image #603	https://media.exapro.com/product/2019/05/P90513116/38ece2c0d527e54afb2f658303b0ba9f/300x221/cincinnati-hack-150m-p90513116_2.jpg
 2019-09-30 03:13:10,623 - INFO - downloader - image #604	https://siertools.com/wp-content/uploads/2019/08/CNC_lathe_Machinery_CNC_Machine_Tool_lathe_machine_CNC_Flat_Bed_Lathe_CKE6150Z_9094_1.jpg
 2019-09-30 03:13:10,655 - INFO - downloader - image #605	https://i.ytimg.com/vi/tfaOgAqTguM/hqdefault.jpg
-2019-09-30 03:13:10,878 - INFO - downloader - image #606	https://media.machines4u.com.au/machinery/86/534986/33381507.jpg?t=1&amp;amp;w=301&amp;amp;h=206
+2019-09-30 03:13:10,878 - INFO - downloader - image #606	https://media.machines4u.com.au/machinery/86/534986/33381507.jpg?t=1&amp;w=301&amp;h=206
 2019-09-30 03:13:11,077 - INFO - downloader - image #607	http://www.jennwei.com/images/pro/jw21_temp1_b.jpg
 2019-09-30 03:13:11,172 - INFO - downloader - image #608	https://cdn.axminster.co.uk/media/catalog/product/cache/1/image/920x/9df78eab33525d08d6e5fb8d27136e95/5/0/507131_xl.jpg
 2019-09-30 03:13:11,279 - INFO - downloader - image #609	https://c8.alamy.com/comp/C8WB3C/cnc-lathe-operator-checking-accuracy-of-a-job-with-a-micrometer-C8WB3C.jpg
@@ -1493,7 +1620,7 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:13:17,515 - INFO - downloader - image #657	https://automatecnc.com/sites/default/files/automatecnc%201.jpg
 2019-09-30 03:13:17,930 - INFO - downloader - image #658	https://www.fastcutt.com/images/FC-TA22.jpg
 2019-09-30 03:13:18,010 - INFO - downloader - image #659	https://i.ebayimg.com/thumbs/images/g/WncAAOSwhpRdE-fK/s-l225.jpg
-2019-09-30 03:13:18,068 - INFO - downloader - image #660	https://img.twa.nl/13119694?width=600&amp;amp;height=450&amp;amp;watermark=none
+2019-09-30 03:13:18,068 - INFO - downloader - image #660	https://img.twa.nl/13119694?width=600&amp;height=450&amp;watermark=none
 2019-09-30 03:13:18,166 - INFO - downloader - image #661	https://clarkmachinerysales.com/wp-content/uploads/2019/05/488952a.jpg
 2019-09-30 03:13:18,241 - INFO - downloader - image #662	https://www.makinaalsat.com/mak/12580/dmg-mori-seiki_1_b.JPG
 2019-09-30 03:13:18,263 - INFO - downloader - image #663	https://thumbs.dreamstime.com/z/cnc-lathe-tool-turret-rotating-head-change-125679075.jpg
@@ -1520,11 +1647,11 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:13:20,597 - INFO - downloader - image #684	https://media.exapro.com/product/2019/08/P90816017/8dbbc7e38276d0001e943924a2f85fea/320x235/graziano-gital-gp-50-p90816017_2.JPG
 2019-09-30 03:13:20,705 - INFO - downloader - image #685	https://thumbs.dreamstime.com/z/sheet-metal-forming-spinning-turning-lathe-machine-sheet-metal-forming-processes-spinning-blank-cnc-lathe-machine-124973085.jpg
 2019-09-30 03:13:20,757 - INFO - downloader - image #686	http://www.boltontools.net/image/cache/data/CBT2060b2-600x600.jpg
-2019-09-30 03:13:21,114 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;amp;ijn=7&amp;amp;start=700&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:13:21,114 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;ijn=7&amp;start=700&amp;tbs=&amp;tbm=isch
 2019-09-30 03:13:21,362 - INFO - downloader - image #687	https://cdn.makinate.com/used-doosan-puma-240mc-cnc-lathe-with-live-tooling-m1903306153/photo/web/used-doosan-puma-240mc-cnc-lathe-with-live-tooling-10.jpeg
 2019-09-30 03:13:21,644 - INFO - downloader - image #688	https://cdn.makinate.com/used-doosan-puma-240mc-cnc-lathe-with-live-tooling-m1903306153/photo/web/used-doosan-puma-240mc-cnc-lathe-with-live-tooling-12.jpeg
-2019-09-30 03:13:21,671 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;amp;ijn=8&amp;amp;start=800&amp;amp;tbs=&amp;amp;tbm=isch
-2019-09-30 03:13:22,266 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;amp;ijn=9&amp;amp;start=900&amp;amp;tbs=&amp;amp;tbm=isch
+2019-09-30 03:13:21,671 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;ijn=8&amp;start=800&amp;tbs=&amp;tbm=isch
+2019-09-30 03:13:22,266 - INFO - parser - parsing result page https://www.google.com/search?q=CNC+lathe&amp;ijn=9&amp;start=900&amp;tbs=&amp;tbm=isch
 2019-09-30 03:13:24,268 - INFO - parser - no more page urls for thread parser-001 to parse
 2019-09-30 03:13:24,272 - INFO - parser - thread parser-001 exit
 2019-09-30 03:13:25,707 - INFO - downloader - no more download task for thread downloader-002
@@ -1536,179 +1663,179 @@ Successfully installed icrawler-0.6.2
 2019-09-30 03:13:26,646 - INFO - downloader - no more download task for thread downloader-004
 2019-09-30 03:13:26,647 - INFO - downloader - thread downloader-004 exit
 2019-09-30 03:13:27,180 - INFO - icrawler.crawler - Crawling task done!
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;curl -s https://course.fast.ai/setup/colab &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; bash
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl -s https://course.fast.ai/setup/colab <span class="p">|</span> bash
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Updating fastai...
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Updating fastai...
 Done.
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;reload_ext&lt;/span&gt; autoreload
-&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;autoreload&lt;/span&gt; 2
-&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;matplotlib&lt;/span&gt; inline
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">reload_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;fastai.vision&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;fastai.metrics&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error_rate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;accuracy&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.vision</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">fastai.metrics</span> <span class="kn">import</span> <span class="n">error_rate</span><span class="p">,</span> <span class="n">accuracy</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;pwd
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pwd
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;/content
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/content
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/content/content&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;/content/content&quot;</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tfms&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get_transforms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;do_flip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ImageList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_folder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split_by_rand_pct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label_from_folder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tfms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;224&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;databunch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normalize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imagenet_stats&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tfms</span> <span class="o">=</span> <span class="n">get_transforms</span><span class="p">(</span><span class="n">do_flip</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">ImageList</span><span class="o">.</span><span class="n">from_folder</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">split_by_rand_pct</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">label_from_folder</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">tfms</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">224</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">databunch</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">imagenet_stats</span><span class="p">))</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show_batch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rows&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;figsize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">show_batch</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
 
 
-&lt;div class=&quot;output_png output_subarea &quot;&gt;
-&lt;img src=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoUAAAI4CAYAAAAcfZN/AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoUAAAI4CAYAAAAcfZN/AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAADl0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uIDMuMC4zLCBo
 dHRwOi8vbWF0cGxvdGxpYi5vcmcvnQurowAAIABJREFUeJzsvXe4JVd5p/t+a62q2unskztHpZZQ
 RFkCEQwCM8A1YMZmDOYCY499HcZj3zHzOI0xtsdxTHDgudgYG48xtsHgRDIGmygBQhGp1a0O6twn
@@ -7279,632 +7406,231 @@ TJgwYcKECRMmMBWFEyZMmDBhwoQJE5iKwgkTJkyYMGHChAlMReGECRMmTJgwYcIEpqJwwoQJEyZM
 mDBhAlNROGHChAkTJkyYMIGpKJwwYcKECRMmTJjAVBROmDBhwoQJEyZMYCoKJ0yYMGHChAkTJjAV
 hRMmTJgwYcKECROYisIJEyZMmDBhwoQJTEXhhAkTJkyYMGHCBKaicMKECRMmTJgwYQJTUThhwoQJ
 EyZMmDCBqSicMGHChAkTJkyYAPx/JRnCua3E2t4AAAAASUVORK5CYII=
-&quot; /&gt;
-&lt;/div&gt;
+" />
+</div>
 
-&lt;/div&gt;
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">classes</span><span class="p">)</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;[&amp;#39;CNC&amp;#39;, &amp;#39;VMC&amp;#39;]
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;CNC&#39;, &#39;VMC&#39;]
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">classes</span><span class="p">),</span> <span class="n">data</span><span class="o">.</span><span class="n">c</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
 
 
-&lt;div class=&quot;output_text output_subarea output_execute_result&quot;&gt;
-&lt;pre&gt;(2, 2)&lt;/pre&gt;
-&lt;/div&gt;
+<div class="output_text output_subarea output_execute_result">
+<pre>(2, 2)</pre>
+</div>
 
-&lt;/div&gt;
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;learn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cnn_learner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resnet34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;accuracy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span> <span class="o">=</span> <span class="n">cnn_learner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet34</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="n">accuracy</span><span class="p">)</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stderr output_text&quot;&gt;
-&lt;pre&gt;Downloading: &amp;#34;https://download.pytorch.org/models/resnet34-333f7ec4.pth&amp;#34; to /root/.cache/torch/checkpoints/resnet34-333f7ec4.pth
-100%|██████████| 87306240/87306240 [00:01&amp;lt;00:00, 83425276.68it/s]
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Downloading: &#34;https://download.pytorch.org/models/resnet34-333f7ec4.pth&#34; to /root/.cache/torch/checkpoints/resnet34-333f7ec4.pth
+100%|██████████| 87306240/87306240 [00:01&lt;00:00, 83425276.68it/s]
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;learn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit_one_cycle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
 
-&lt;div class=&quot;output_html rendered_html output_subarea &quot;&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&quot;text-align: left;&quot;&gt;
-      &lt;th&gt;epoch&lt;/th&gt;
-      &lt;th&gt;train_loss&lt;/th&gt;
-      &lt;th&gt;valid_loss&lt;/th&gt;
-      &lt;th&gt;accuracy&lt;/th&gt;
-      &lt;th&gt;time&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0.764040&lt;/td&gt;
-      &lt;td&gt;0.545058&lt;/td&gt;
-      &lt;td&gt;0.744094&lt;/td&gt;
-      &lt;td&gt;06:42&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;0.596286&lt;/td&gt;
-      &lt;td&gt;0.421053&lt;/td&gt;
-      &lt;td&gt;0.834646&lt;/td&gt;
-      &lt;td&gt;06:40&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;0.481726&lt;/td&gt;
-      &lt;td&gt;0.406174&lt;/td&gt;
-      &lt;td&gt;0.842520&lt;/td&gt;
-      &lt;td&gt;06:40&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;0.410549&lt;/td&gt;
-      &lt;td&gt;0.399634&lt;/td&gt;
-      &lt;td&gt;0.842520&lt;/td&gt;
-      &lt;td&gt;06:42&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;0.373992&lt;/td&gt;
-      &lt;td&gt;0.382920&lt;/td&gt;
-      &lt;td&gt;0.862205&lt;/td&gt;
-      &lt;td&gt;06:43&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>accuracy</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.764040</td>
+      <td>0.545058</td>
+      <td>0.744094</td>
+      <td>06:42</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.596286</td>
+      <td>0.421053</td>
+      <td>0.834646</td>
+      <td>06:40</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.481726</td>
+      <td>0.406174</td>
+      <td>0.842520</td>
+      <td>06:40</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.410549</td>
+      <td>0.399634</td>
+      <td>0.842520</td>
+      <td>06:42</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.373992</td>
+      <td>0.382920</td>
+      <td>0.862205</td>
+      <td>06:43</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-&lt;/div&gt;
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;/div&gt;</content><author><name>Sharan Kumar</name></author><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://sharan19.github.io/Sharan-s-Blog/images/some_folder/your_image.png" /><media:content medium="image" url="https://sharan19.github.io/Sharan-s-Blog/images/some_folder/your_image.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">My Sales Performance</title><link href="https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/sales/haas/forecasting/vmc/colab/2020/03/30/_03_26_Sharan_Sales_Performance.html" rel="alternate" type="text/html" title="My Sales Performance" /><published>2020-03-30T00:00:00-05:00</published><updated>2020-03-30T00:00:00-05:00</updated><id>https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/sales/haas/forecasting/vmc/colab/2020/03/30/_03_26_Sharan_Sales_Performance</id><content type="html" xml:base="https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/sales/haas/forecasting/vmc/colab/2020/03/30/_03_26_Sharan_Sales_Performance.html">&lt;!--
-#################################################
-### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
-#################################################
-# file to edit: _notebooks/2020_03_26_Sharan_Sales_Performance.ipynb
---&gt;
-
-&lt;div class=&quot;container&quot; id=&quot;notebook-container&quot;&gt;
-        
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-
-&lt;/div&gt;
-    
-
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
-
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Liberaries which we are going to use are mentioned. Any additional libraries will be added as and when required&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# Pandas library is for basic operations like print, write , read , merge etc., so i add them in all notebooks&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# Numpy library is for mathematical operations&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# Matplotlib is for creating plots,  graphs and visual representation to better understand our findings&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pandas&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pd&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;np&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;plt&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matplotlib&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inline&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# The last line is to ensure the plots open in same window instead of seperate window&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-    
-
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
-
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# We are creating a dataframe, which will hold the data. In this case the data is in an excel sheet.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#for an earlier version of Excel, you may need to use the file extension of &amp;#39;xls&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# We can give any name for the the data frame we created but I am giving the name df for shortform of dataframe&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# (i know it&amp;#39;s obvious but nevermind ). header =1 to mention that the first row is column name&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_excel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;C:\Users\sharan\Desktop\office\Sharan Performance.xlsx&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-
-&lt;span class=&quot;c1&quot;&gt;#df=df.to_string(index=False)&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
-
-&lt;div class=&quot;output_area&quot;&gt;
-
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;                    Customer Machine     Month  Year         Sector  \
-0          Limat Engineering    VF-4  February  2019       toolroom   
-1             DMV Industries    VF-4       May  2019  die and mould   
-2                    Sosher     VF-2      July  2019       toolroom   
-3                    Sosher   ST 20Y      July  2019       toolroom   
-4                   Texcel Q    VF-2    August  2019     production   
-5               Rapid ProMac    VF-4  December  2019     production   
-6  Royal Casting Engineering    VF-4   January  2020  die and mould   
-7               Rapid ProMac    VF-2  February  2020     production   
-
-        Region  Previous machine Stock machine  
-0      Chennai                 0            No  
-1      Chennai                 0            No  
-2  Kanchipuram                 0            No  
-3  Kanchipuram                 0            No  
-4  Kanchipuram                 7           Yes  
-5      Chennai                 2           Yes  
-6  Thiruvallur                 0            No  
-7      Chennai                 3           Yes  
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-    
-
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;The above list contains list of customers who purchased haas machines from Me, Sharan Kumar.
-The columns are:&lt;/p&gt;
-&lt;p&gt;Customer: Customer name&lt;/p&gt;
-&lt;p&gt;Machine : Machine purchased from me&lt;/p&gt;
-&lt;p&gt;Month   : Month of purchase&lt;/p&gt;
-&lt;p&gt;Year    : Year of purchase&lt;/p&gt;
-&lt;p&gt;Sector  : Sector in which customer works in&lt;/p&gt;
-&lt;p&gt;Region  : District in which the company is located&lt;/p&gt;
-&lt;p&gt;Previous machine: Previous machine in same catagory the customer has. For example, if he is purchasing VMC then the table will 
-have number of VMCs.&lt;/p&gt;
-&lt;p&gt;Stock machine : Whether the machine already exisitng in our stock or they had to be imported.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
-
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dtypes&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
-
-&lt;div class=&quot;output_area&quot;&gt;
-
-
-
-&lt;div class=&quot;output_text output_subarea output_execute_result&quot;&gt;
-&lt;pre&gt;Customer            object
-Machine             object
-Month               object
-Year                 int64
-Sector              object
-Region              object
-Previous machine     int64
-Stock machine       object
-dtype: object&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-    
-
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
-
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Customer&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Machine&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Month&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Sector&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Region&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Stock machine&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Customer&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Machine&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Month&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Sector&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Region&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Stock machine&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;astype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-    
-
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
-
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#convert_dict={&amp;#39;Customer&amp;#39;:str,&amp;#39;Machine&amp;#39;:str,&amp;#39;Month&amp;#39;:str,&amp;#39;sector&amp;#39;:str, &amp;#39;region&amp;#39;:str,&amp;#39;Stock machine&amp;#39;:str}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-    
-
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
-
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#df = df.astype(convert_dict) &lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dtypes&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
-
-&lt;div class=&quot;output_area&quot;&gt;
-
-
-
-&lt;div class=&quot;output_text output_subarea output_execute_result&quot;&gt;
-&lt;pre&gt;Customer            object
-Machine             object
-Month               object
-Year                 int64
-Sector              object
-Region              object
-Previous machine     int64
-Stock machine       object
-dtype: object&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-    
-
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
-
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot; Number of machines sold in 2018:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Machine&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Year&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2018&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
-
-&lt;div class=&quot;output_area&quot;&gt;
-
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt; Number of machines sold in 2018: 0
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-    
-
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
-
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Number of machines sold in 2019:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Machine&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Year&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2019&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Different machines sold in 2019:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Machine&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Year&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2019&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value_counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
-
-&lt;div class=&quot;output_area&quot;&gt;
-
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Number of machines sold in 2019: 6
-
-Different machines sold in 2019:
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;output_area&quot;&gt;
-
-
-
-&lt;div class=&quot;output_text output_subarea output_execute_result&quot;&gt;
-&lt;pre&gt;VF-4      3
-VF-2      2
-ST 20Y    1
-Name: Machine, dtype: int64&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-    
-
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
-
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Number of machines sold in 2020:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Machine&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Year&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2020&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Different machines sold in 2020:&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Machine&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Year&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2020&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value_counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;* Made till end of February&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
-
-&lt;div class=&quot;output_area&quot;&gt;
-
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Number of machines sold in 2020: 2 *
-
-Different machines sold in 2020:
-
-VF-4    1
-VF-2    1
-Name: Machine, dtype: int64
-
-* Made till end of february
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-    
-
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
-
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot; Total number of machines sold:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Machine&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
-
-&lt;div class=&quot;output_area&quot;&gt;
-
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt; Total number of machines sold: 8
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-    
-
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
-
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Different machines sold:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;groupby&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Year&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Machine&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value_counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
-
-&lt;div class=&quot;output_area&quot;&gt;
-
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Different machines sold:
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;output_area&quot;&gt;
-
-
-
-&lt;div class=&quot;output_text output_subarea output_execute_result&quot;&gt;
-&lt;pre&gt;Year  Machine
-2019  VF-4       3
-      VF-2       2
-      ST 20Y     1
-2020  VF-2       1
-      VF-4       1
-Name: Machine, dtype: int64&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-    
-
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;I have been part of manav marketing since 2018 september that means I have been in company for 4 months in 2018. I have sold 6  machines in 2019 and 2 machine in 2020. The most sold machine is VF-4.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name>Sharan Kumar</name></author><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://sharan19.github.io/Sharan-s-Blog/images/some_folder/your_image.png" /><media:content medium="image" url="https://sharan19.github.io/Sharan-s-Blog/images/some_folder/your_image.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+</div>
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="sharan19/Sharan-s-Blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/Sharan-s-Blog/fastpages/cnc/lathe/vmc/jupyter/2020/03/31/CNC-vs-VMC.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/Sharan-s-Blog/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Sharan&#39;s Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Sharan&#39;s Blog</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list">
+  <li><a href="https://github.com/sharan19"><svg class="social svg-icon"><use xlink:href="/Sharan-s-Blog/assets/minima-social-icons.svg#github"></use></svg> <span class="username">sharan19</span></a></li><li><a href="https://www.linkedin.com/in/amsharan"><svg class="social svg-icon"><use xlink:href="/Sharan-s-Blog/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">amsharan</span></a></li><li><a href="https://www.twitter.com/amsharan"><svg class="social svg-icon"><use xlink:href="/Sharan-s-Blog/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">amsharan</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Sharan&#39;s programming and self documentaion site</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
