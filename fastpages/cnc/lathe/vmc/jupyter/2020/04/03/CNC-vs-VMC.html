@@ -8,8 +8,8 @@
 <meta property="og:title" content="CNC vs VMC" />
 <meta name="author" content="Sharan Kumar" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="This notebook creates image classifier to distinguish between CNC lathes which are sometimes called CNCs and Vertical Machining centers which are called VMCs" />
-<meta property="og:description" content="This notebook creates image classifier to distinguish between CNC lathes which are sometimes called CNCs and Vertical Machining centers which are called VMCs" />
+<meta name="description" content="This notebook creates image classifier to distinguish between CNC lathes which are called CNCs and Vertical Machining centers which are called VMCs" />
+<meta property="og:description" content="This notebook creates image classifier to distinguish between CNC lathes which are called CNCs and Vertical Machining centers which are called VMCs" />
 <link rel="canonical" href="https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/lathe/vmc/jupyter/2020/04/03/CNC-vs-VMC.html" />
 <meta property="og:url" content="https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/lathe/vmc/jupyter/2020/04/03/CNC-vs-VMC.html" />
 <meta property="og:site_name" content="Sharan’s Blog" />
@@ -17,7 +17,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-04-03T00:00:00-05:00" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"Sharan Kumar"},"description":"This notebook creates image classifier to distinguish between CNC lathes which are sometimes called CNCs and Vertical Machining centers which are called VMCs","@type":"BlogPosting","headline":"CNC vs VMC","dateModified":"2020-04-03T00:00:00-05:00","datePublished":"2020-04-03T00:00:00-05:00","url":"https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/lathe/vmc/jupyter/2020/04/03/CNC-vs-VMC.html","image":"https://sharan19.github.io/Sharan-s-Blog/images/some_folder/your_image.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/lathe/vmc/jupyter/2020/04/03/CNC-vs-VMC.html"},"@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"Sharan Kumar"},"description":"This notebook creates image classifier to distinguish between CNC lathes which are called CNCs and Vertical Machining centers which are called VMCs","@type":"BlogPosting","headline":"CNC vs VMC","dateModified":"2020-04-03T00:00:00-05:00","datePublished":"2020-04-03T00:00:00-05:00","url":"https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/lathe/vmc/jupyter/2020/04/03/CNC-vs-VMC.html","image":"https://sharan19.github.io/Sharan-s-Blog/images/some_folder/your_image.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://sharan19.github.io/Sharan-s-Blog/fastpages/cnc/lathe/vmc/jupyter/2020/04/03/CNC-vs-VMC.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -76,7 +76,7 @@
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">CNC vs VMC</h1><p class="page-description">This notebook creates image classifier to distinguish between CNC lathes which are sometimes called CNCs and Vertical Machining centers which are called VMCs</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-04-03T00:00:00-05:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">CNC vs VMC</h1><p class="page-description">This notebook creates image classifier to distinguish between CNC lathes which are called CNCs and Vertical Machining centers which are called VMCs</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-04-03T00:00:00-05:00" itemprop="datePublished">
         Apr 3, 2020
       </time>• 
           <span itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -84,7 +84,7 @@
        • <span class="read-time" title="Estimated read time">
     
     
-      77 min read
+      78 min read
     
 </span></p>
 
@@ -141,24 +141,21 @@
 </div>
     
 
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## HI this is sharan creating. VMC Vs CNC image classifier. </span>
-<span class="c1">##  Used Fast.AI library for this.</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This notebook is based on lessons 1 and parts of lesson 2 of fast.ai MOOC by Jermey Howard.</p>
+<p>We will do the following in this notebook :</p>
+<ol>
+<li>Scrap images from internet to create database.</li>
+<li>Build image classifier using fast.ai library.</li>
+</ol>
+<ol>
+<li>We will be using icrawler to build this database. It can build large databases with minimal code. I was able to develop 600 images of one type and 700 images of other type. </li>
+</ol>
 
 </div>
-    
-
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1679,6 +1676,15 @@ Successfully installed icrawler-0.6.2
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li>Now we will build the model to classify our images. We can train them on the basis of wither accuracy or error rate. I am using accuracy to train the model.</li>
+</ol>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1819,6 +1825,13 @@ Done.
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We take a peak into our image collection.</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -7598,6 +7611,19 @@ EyZMmDCBqSicMGHChAkTJkyYAPx/JRnCua3E2t4AAAAASUVORK5CYII=
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We have got 86% accuracy within 7 minutes of training. The loss in accuracy is mainly due to incorrect images in each catagory. The other reason for loss of accuracy is some unclear images.</p>
+<p>After this:</p>
+<ul>
+<li>We can further fine tune this to improve our accuracy.</li>
+<li>Build a App which can even be used for teaching.</li>
+<li>Build a App which can classify if a given machine is CNC or VMC.</li>
+</ul>
+
+</div>
+</div>
+</div>
 </div>
 
 
